@@ -1,0 +1,88 @@
+body {
+	background: #F6F8FA;
+}
+
+.main-header {
+	background: #fff;
+	padding: 20px;
+}
+
+.main-nav, .btn-primary {
+	background-color: #7553A8;
+	border-color: #563D7C; 
+	border: none;
+}
+
+.btn-outline-primary {
+	color: #563D7C;
+	border-color: #563D7C;
+}
+
+.main-nav a {
+	color: #eee;
+	font-size: 1.1em;
+	margin-left: 20px;
+}
+
+.logo {
+	display: block;
+}
+
+.section-h {
+	text-align: center;
+	margin: 30px auto 50px;
+	font-size: 42px;
+	font-weight: 300;
+	line-height: 1.2;
+}
+
+.jumbotron-h {
+	font-size: 42px;
+	font-weight: 300;
+	line-height: 1.2;
+}
+
+.jumbotron {
+	background: #fff;
+}
+
+.list-img {
+	width: 100%;
+	max-width: 100px;
+	border-radius: 50%;
+}
+
+.list-text {
+	margin-left: 20px;
+}
+
+section {
+	padding: 40px 0;
+}
+
+.bg-pattern {
+	background: #ECEEF0;
+	background: url(../img/bgrevue3.png);
+	border: 1px solid #eee;
+}
+
+.card {
+	height: 480px;
+	position: relative;
+}
+
+.card-link-container {
+	position: absolute;
+	bottom: 20px;
+	left: 0;
+	right: 0;
+	text-align: center;
+}
+
+.other-actus {
+	margin-top: 100px;
+}
+
+.other-actus img {
+	margin-bottom: 20px;
+}
