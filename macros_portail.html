@@ -123,10 +123,10 @@
  */
 <DEFFUNC NAME="NAV" REQUIRED="identifier" OPTIONAL="classname">
 	<LET VAR="id_page_courante">[#ID]</LET>
-	<LOOP NAME="main_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
-		<LOOP NAME="main_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
+	<LOOP NAME="nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
+		<LOOP NAME="nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
 			<BEFORE>
-				<nav class="main-nav navbar navbar-expand-lg navbar-center [#CLASSNAME]">
+				<nav class="navbar navbar-expand-lg navbar-center [#CLASSNAME]">
 					<div class="container">
 						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
 							<span class="navbar-toggler-icon"></span>
@@ -136,12 +136,26 @@
 			</BEFORE>
 
 			<DO>
-				<IF COND="[#URL] EQ [#ID_PAGE_COURANTE]">
-					<LET VAR="active_class">active</LET>
-				</IF>
-				<li class="nav-item [#ACTIVE_CLASS]">
-					<a class="nav-link" href="[#URL]">[#TITRE]</a>
-				</li>
+				<LOOP NAME="nav_cible" TABLE="relations" WHERE="nature='cible' AND id1='[#ID]'" SELECT="id2 AS cible" LIMIT="0,1">
+					<DO>
+						<IF COND="[#CIBLE] EQ [#ID_PAGE_COURANTE]">
+							<LET VAR="active_class">active</LET>
+						</IF>
+						<li class="nav-item [#ACTIVE_CLASS]">
+							<a class="nav-link" href="[#CIBLE]">[#TITRE]</a>
+						</li>
+					</DO>
+
+					<ALTERNATIVE>
+						<!--[ Si pas de cible alors lien vers l'accueil ]-->
+						<IF COND="[#ID_PAGE_COURANTE] EQ '0'">
+							<LET VAR="active_class">active</LET>
+						</IF>
+						<li class="nav-item [#ACTIVE_CLASS]">
+							<a class="nav-link" href=".">[#TITRE]</a>
+						</li>
+					</ALTERNATIVE>
+				</LOOP>
 			</DO>
 
 			<AFTER>
