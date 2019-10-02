@@ -22,7 +22,7 @@
 		</head>
 		<body>
 			<MACRO NAME="MAIN_HEADER" />
-			<FUNC NAME="NAV" IDENTIFIER="main-nav" CLASSNAME="main-nav" />
+			<FUNC NAME="NAV" IDENTIFIER="menu-principal" CLASSNAME="main-nav" />
 </DEFFUNC>
 
 /**
@@ -111,7 +111,7 @@
 <DEFMACRO NAME="FOOTER">
 	<footer class="py-5 mt-5 bg-dark">
 		<div class="container text-center text-white">
-			<FUNC NAME="NAV" IDENTIFIER="footer-nav" CLASSNAME="footer-nav" />
+			<FUNC NAME="NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" />
 		</div>
 	</footer>
 </DEFMACRO>
@@ -123,8 +123,8 @@
  */
 <DEFFUNC NAME="NAV" REQUIRED="identifier" OPTIONAL="classname">
 	<LET VAR="id_page_courante">[#ID]</LET>
-	<LOOP NAME="main_nav_parent" TABLE="publications" WHERE="type='collection' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
-		<LOOP NAME="main_nav_menuitems" TABLE="?" WHERE="type='?' AND idparent='[#ID]'" SELECT="titre, url">
+	<LOOP NAME="main_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
+		<LOOP NAME="main_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
 			<BEFORE>
 				<nav class="main-nav navbar navbar-expand-lg navbar-center [#CLASSNAME]">
 					<div class="container">
