@@ -162,7 +162,7 @@
  */
 <DEFFUNC NAME="NAV_CIBLE" REQUIRED="ID">
 	<LOOP NAME="nav_cible" TABLE="relations" WHERE="nature='cible' AND id1='[#ID]'" SELECT="id2 AS cible" LIMIT="0,1">
-		<DO>[#CIBLE]</DO>
+		<DO>[#CIBLE|makeurlwithid]</DO>
 		<ALTERNATIVE>.</ALTERNATIVE>
 	</LOOP>
 </DEFFUNC>
@@ -182,7 +182,6 @@
 <DEFMACRO NAME="HOME_PRESENTATION">
 	<LOOP NAME="home_presentation_parent" TABLE="publications" WHERE="type='menu' AND identifier='presentation'" SELECT="id" LIMIT="0,1" />
 		<LOOP NAME="home_presentation_elements" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre, description, vignette" ORDER="rank" />
-			<!--[ TODO: [#CIBLE] ]-->
 			<BEFORE>
 				<section class="header">
 					<div class="container">
@@ -196,9 +195,10 @@
 					<IF COND="[#DESCRIPTION]">
 						<p class="lead">[#DESCRIPTION]</p>
 					</IF>
-					<IF COND="[#URL]">
+					<LET VAR="cible" /><FUNC NAME="NAV_CIBLE" ID="[#ID]" /></LET>
+					<IF COND="[#CIBLE|trim] NE '.'">
 						<div class="btn btn-outline-primary btn-lg mt-2">
-							<a href="[#URL]">[@EN_SAVOIR_PLUS] &raquo;</a>
+							<a href="[#CIBLE|trim]">[@EN_SAVOIR_PLUS]</a>
 						</div>
 					</IF>
 				</div>
@@ -211,17 +211,20 @@
 				</IF>
 
 				<div class="list-group-item list-group-item-action flex-column align-items-center">
-					<div class="d-flex flex-row w-100 justify-content-center align-items-center">
-						<IF COND="[#VIGNETTE]">
-							<img src="[#VIGNETTE]" alt="" class="list-img">
-						</IF>
-						<div class="list-text">
-							<h5 class="mb-1">[#TITRE]</h5>
-							<IF COND="[#DESCRIPTION]">
-								<p class="mb-1">[#DESCRIPTION]</p>
+					<LET VAR="cible" /><FUNC NAME="NAV_CIBLE" ID="[#ID]" /></LET>
+					<IF COND="[#CIBLE|trim] NE '.'"><a href="[#CIBLE|trim]"></IF>
+						<div class="d-flex flex-row w-100 justify-content-center align-items-center">
+							<IF COND="[#VIGNETTE]">
+								<img src="[#VIGNETTE]" alt="" class="list-img">
 							</IF>
+							<div class="list-text">
+								<h5 class="mb-1">[#TITRE]</h5>
+								<IF COND="[#DESCRIPTION]">
+									<p class="mb-1">[#DESCRIPTION]</p>
+								</IF>
+							</div>
 						</div>
-					</div>
+					<IF COND="[#CIBLE|trim] NE '.'"></a></IF>
 				</div>
 				
 				<IF COND="[#COUNT] EQ [#NBRESULTS]">
