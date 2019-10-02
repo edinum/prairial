@@ -136,26 +136,13 @@
 			</BEFORE>
 
 			<DO>
-				<LOOP NAME="nav_cible" TABLE="relations" WHERE="nature='cible' AND id1='[#ID]'" SELECT="id2 AS cible" LIMIT="0,1">
-					<DO>
-						<IF COND="[#CIBLE] EQ [#ID_PAGE_COURANTE]">
-							<LET VAR="active_class">active</LET>
-						</IF>
-						<li class="nav-item [#ACTIVE_CLASS]">
-							<a class="nav-link" href="[#CIBLE]">[#TITRE]</a>
-						</li>
-					</DO>
-
-					<ALTERNATIVE>
-						<!--[ Si pas de cible alors lien vers l'accueil ]-->
-						<IF COND="[#ID_PAGE_COURANTE] EQ '0'">
-							<LET VAR="active_class">active</LET>
-						</IF>
-						<li class="nav-item [#ACTIVE_CLASS]">
-							<a class="nav-link" href=".">[#TITRE]</a>
-						</li>
-					</ALTERNATIVE>
-				</LOOP>
+				<LET VAR="cible" /><FUNC NAME="NAV_CIBLE" ID="[#ID]" /></LET>
+				<IF COND="[#CIBLE|trim] EQ [#ID_PAGE_COURANTE] OR ([#CIBLE|trim] EQ '.' AND [#ID_PAGE_COURANTE] EQ '0')">
+					<LET VAR="active_class">active</LET>
+				</IF>
+				<li class="nav-item [#ACTIVE_CLASS]">
+					<a class="nav-link" href="[#CIBLE|trim]">[#TITRE]</a>
+				</li>
 			</DO>
 
 			<AFTER>
@@ -165,6 +152,18 @@
 				</nav>
 			</AFTER>
 		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Récupérer la cible d'un élément de menu.
+ * @param {number} id - ID de l'elementdemenu.
+ * Si pas de cible alors on retourne "." pour lier vers l'accueil.
+ */
+<DEFFUNC NAME="NAV_CIBLE" REQUIRED="ID">
+	<LOOP NAME="nav_cible" TABLE="relations" WHERE="nature='cible' AND id1='[#ID]'" SELECT="id2 AS cible" LIMIT="0,1">
+		<DO>[#CIBLE]</DO>
+		<ALTERNATIVE>.</ALTERNATIVE>
 	</LOOP>
 </DEFFUNC>
 
