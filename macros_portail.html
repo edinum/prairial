@@ -1,0 +1,352 @@
+<CONTENT VERSION="1.0" LANG="fr" CHARSET="utf-8" />
+
+/**
+ * Intialisation.
+ */
+<DEFMACRO NAME="INIT">
+	<LET VAR="chemin_logo" GLOBAL="1">tpl/images/logo.jpg</LET>
+</DEFMACRO>
+
+/**
+ * Ouverture de la page.
+ * @param {string} [titre_page] - Titre de la page à ajouter à la balise title.
+ */
+<DEFFUNC NAME="PAGE_START" OPTIONAL="titre_page">
+	<!doctype html>
+	<html lang="fr">
+		<head>
+			<meta charset="utf-8">
+			<title><IF COND="[#TITRE_PAGE]">[#TITRE_PAGE] – </IF>[#OPTIONS.METADONNEESSITE.TITRESITE]</title>
+			<MACRO NAME="METAS" />
+			<MACRO NAME="CSS" />
+		</head>
+		<body>
+			<MACRO NAME="MAIN_HEADER" />
+			<FUNC NAME="NAV" IDENTIFIER="main-nav" CLASSNAME="main-nav" />
+</DEFFUNC>
+
+/**
+ * Fermeture de la page.
+ */
+<DEFMACRO NAME="PAGE_END">
+			<MACRO NAME="FOOTER" />
+			<MACRO NAME="JS" />
+		</body>
+	</html>
+</DEFMACRO>
+
+/**
+ * Métadonnées de la page.
+ */
+<DEFMACRO NAME="METAS">
+	<meta name="generator" content="Lodel [#VERSION]" />
+	<meta name="url" content="[%SITEINFOS.URL]" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--[ keywords / DC.subject ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE]">
+		<meta name="keywords" content="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE|textebrut|cleanBadChars|replacequotationmark]" />
+		<meta name="DC.subject" content="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE|textebrut|cleanBadChars|replacequotationmark]" />
+	</IF>
+
+	<!--[ description / DC.description ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.DESCRIPTIONSITE]">
+		<LET VAR="description">[#OPTIONS.METADONNEESSITE.DESCRIPTIONSITE|textebrut|cleanBadChars|replacequotationmark]</LET>
+		<meta name="description" content="[#DESCRIPTION]" />
+		<meta name="DC.description" content="[#DESCRIPTION]" />
+	</IF>
+
+	<!--[ DC.rights ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.DROITSAUTEUR]">
+		<meta name="DC.rights" content="[#OPTIONS.METADONNEESSITE.DROITSAUTEUR|textebrut|cleanBadChars|replacequotationmark]" />
+	</IF>
+	
+	<!--[ Open Graph ]-->
+	<meta property="og:title" content="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="[%SITEINFOS.URL]" />
+	<IF COND="[%CHEMIN_LOGO]">
+		<meta property="og:image" content="[%CHEMIN_LOGO]" />
+	</IF>
+</DEFMACRO>
+
+/**
+ * Inclusion des CSS.
+ */
+<DEFMACRO NAME="CSS">
+	<!--[ Bootstrap ]-->
+	<link href="tpl/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!--[ Prairial ]-->
+	<link href="tpl/css/prairial.css" rel="stylesheet">
+</DEFMACRO>
+
+/**
+ * Inclusion du JS.
+ */
+<DEFMACRO NAME="JS">
+	<!--[ JQuery ]-->
+	<script src="tpl/vendor/jquery-3.4.1.min.js"></script>
+
+	<!--[ Bootstrap ]-->
+	<script src="tpl/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</DEFMACRO>
+
+/**
+ * Bandeau supérieur.
+ */
+<DEFMACRO NAME="MAIN_HEADER">
+	<header class="main-header">
+		<div class="container">
+			<IF COND="[%CHEMIN_LOGO]">
+				<img class="logo" src="[%CHEMIN_LOGO]" alt="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
+			</IF>
+		</div>
+	</header>
+</DEFMACRO>
+
+/**
+ * Pied de page.
+ */
+<DEFMACRO NAME="FOOTER">
+	<footer class="py-5 mt-5 bg-dark">
+		<div class="container text-center text-white">
+			<FUNC NAME="NAV" IDENTIFIER="footer-nav" CLASSNAME="footer-nav" />
+		</div>
+	</footer>
+</DEFMACRO>
+
+/**
+ * Insertion d'un menu.
+ * @param {string} identifier - Identifiant du menu.
+ * @param {string} [classname] - Classe ajoutée à l'élément nav.
+ */
+<DEFFUNC NAME="NAV" REQUIRED="identifier" OPTIONAL="classname">
+	<LET VAR="id_page_courante">[#ID]</LET>
+	<LOOP NAME="main_nav_parent" TABLE="publications" WHERE="type='collection' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
+		<LOOP NAME="main_nav_menuitems" TABLE="?" WHERE="type='?' AND idparent='[#ID]'" SELECT="titre, url">
+			<BEFORE>
+				<nav class="main-nav navbar navbar-expand-lg navbar-center [#CLASSNAME]">
+					<div class="container">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarResponsive">
+							<ul class="navbar-nav ml-auto-off">
+			</BEFORE>
+
+			<DO>
+				<IF COND="[#URL] EQ [#ID_PAGE_COURANTE]">
+					<LET VAR="active_class">active</LET>
+				</IF>
+				<li class="nav-item [#ACTIVE_CLASS]">
+					<a class="nav-link" href="[#URL]">[#TITRE]</a>
+				</li>
+			</DO>
+
+			<AFTER>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Contenu de la home.
+ */
+<DEFMACRO NAME="HOME_MAIN">
+	<MACRO NAME="HOME_PRESENTATION" />
+	<FUNC NAME="CATALOGUE" MAX="3" />
+	<MACRO NAME="HOME_ACTUALITES" />
+</DEFMACRO>
+
+/**
+ * Présentation du portail sur la home.
+ */
+<DEFMACRO NAME="HOME_PRESENTATION">
+	<LOOP NAME="home_presentation_parent" TABLE="publications" WHERE="type='menu' AND identifier='presentation'" SELECT="id" LIMIT="0,1" />
+		<LOOP NAME="home_presentation_elements" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre, description, vignette" ORDER="rank" />
+			<!--[ TODO: [#CIBLE] ]-->
+			<BEFORE>
+				<section class="header">
+					<div class="container">
+						<div class="jumbotron border my-4">
+							<div class="row">
+			</BEFORE>
+
+			<DOFIRST>
+				<div class="col-md-6">
+					<h1 class="jumbotron-h">[#TITRE]</h1>
+					<IF COND="[#DESCRIPTION]">
+						<p class="lead">[#DESCRIPTION]</p>
+					</IF>
+					<IF COND="[#URL]">
+						<div class="btn btn-outline-primary btn-lg mt-2">
+							<a href="[#URL]">[@EN_SAVOIR_PLUS] &raquo;</a>
+						</div>
+					</IF>
+				</div>
+			</DOFIRST>
+
+			<DO>
+				<IF COND="[#COUNT] EQ 2">
+					<div class="col-md-6">
+						<div class="list-group list-group-flush">
+				</IF>
+
+				<div class="list-group-item list-group-item-action flex-column align-items-center">
+					<div class="d-flex flex-row w-100 justify-content-center align-items-center">
+						<IF COND="[#VIGNETTE]">
+							<img src="[#VIGNETTE]" alt="" class="list-img">
+						</IF>
+						<div class="list-text">
+							<h5 class="mb-1">[#TITRE]</h5>
+							<IF COND="[#DESCRIPTION]">
+								<p class="mb-1">[#DESCRIPTION]</p>
+							</IF>
+						</div>
+					</div>
+				</div>
+				
+				<IF COND="[#COUNT] EQ [#NBRESULTS]">
+						</div>
+					</div>
+				</IF>
+			</DO>
+
+			<AFTER>
+							</div>
+						</div>
+					</div>
+				</section>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFMACRO>
+
+/**
+ * Catalogue.
+ * @param {string} [max] - Nombre maximum de volumes affichés.
+ * @param {boolean} [filtres] - Afficher les filtres dynamiques.
+ */
+<DEFFUNC NAME="CATALOGUE" OPTIONAL="max, filtres">
+	<IF COND="[#FILTRES]">
+		<MACRO NAME="CATALOGUE_FILTRES" />
+	</IF>
+	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='collection' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
+		<!-- TODO: ajouter la LIMIT = [#MAX] -->
+		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" ORDER="rank" />
+			<BEFORE>
+				<!-- TODO: revoir tout le markup de ce truc + utiliser des variables de trad + le background subbtle pattern doit etre optionnel car uniquement sur la home -->
+				<section class="revues bg-pattern">
+					<div class="container">
+						<h2 class="section-h">Dernières revues en ligne</h2>
+						<!-- TODO: ici il faut plutôt utiliser un container flexbox https://getbootstrap.com/docs/4.0/utilities/flex/ -->
+						<div class="row">
+			</BEFORE>
+
+			<DO>
+				<div class="col-md-4">
+					<div class="card">
+						<IF COND="[#VIGNETTE]">
+							<img class="card-img-top" src="[#VIGNETTE]" alt="" />
+						</IF>
+						<div class="card-body">
+							<h5 class="card-title">[#TITRE]</h5>
+							<IF COND="[#SOUSTITRE]">
+								<h6 class="card-subtitle mb-2 text-muted">[#SOUSTITRE]</h6>
+							</IF>
+							<IF COND="[#DESCRIPTION]">
+								<p class="card-text">[#DESCRIPTION]</p>
+							</IF>
+							<div class="card-link-container">
+								<a href="[#URL]" class="card-link btn btn-outline-secondary">Visiter le site</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</DO>
+
+			<AFTER>
+						</div>
+						<IF COND="[#MAX]">
+							<div class="lien-catalogue text-center">
+								<a href="#" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">Consulter l'intégralité du catalogue &raquo;</a>
+							</div>
+						</IF>
+					</div>
+				</section>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Filtres du catalogue.
+ */
+<DEFMACRO NAME="CATALOGUE_FILTRES">
+	Filtres.
+</DEFMACRO>
+
+/**
+ * Actualités affichées sur la home.
+ */
+<DEFMACRO NAME="HOME_ACTUALITES">
+	<!--[ TODO: ajouter une date d'expiration ]-->
+	<LOOP NAME="home_actualites" TABLE="textessimples" WHERE="type='billetactualite'" SELECT="id, titre, texte, datedexpiration, vignette" LIMIT="0,4" ORDER="rank" />
+		<BEFORE>
+			<section class="actus">
+				<div class="container">
+					<h2 class="section-h">Actualités du portail</h2>
+		</BEFORE>
+
+		<DOFIRST>
+			<div class="row">
+				<div class="col-md-6">
+					<IF COND="[#VIGNETTE]">
+						<img src="[#VIGNETTE]" class="img-fluid" alt="">
+					</IF>
+				</div>
+				<div class="col-md-6">
+					<h3>[#TITRE]</h3>
+					<div class="actu-date">[#DATEPUBLI]</div>
+					<IF COND="[#TEXTE]">
+						<p class="lead">[#TEXTE|removetags('p')|cuttext(500)]</p>
+						<IF COND="[#TEXTE|hasbeencut]">
+							<a href="[#ID|makeurlwithid]" title="[@LIRE_LA_SUITE]">(&#8230;)</a>
+						</IF>
+					</IF>
+					<div class="btn btn-outline-primary btn-lg mt-2">[@LIRE_ACTUALITE]</div>
+				</div>
+			</div>
+		</DOFIRST>
+
+		<DO>
+			<IF COND="[#COUNT] EQ 2">
+				<div class="row other-actus">
+			</IF>
+
+			<div class="col-md-4">
+				<a href="[#ID|makeurlwithid]">
+					<h3>[#TITRE]</h3>
+					<IF COND="[#VIGNETTE]">
+						<img src="[#VIGNETTE]" class="img-fluid" alt="">
+					</IF>
+					<div class="actu-date">[#DATEPUBLI]</div>
+				</a>
+			</div>
+
+			<IF COND="[#COUNT] EQ [#NBRESULTS]">
+				</div>
+			</IF>
+		</DO>
+
+		<AFTER>
+				</div>
+			</section>
+		</AFTER>
+	</LOOP>
+</DEFMACRO>
