@@ -256,8 +256,10 @@
 		<MACRO NAME="CATALOGUE_FILTRES" />
 	</IF>
 	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='collection' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
-		<!-- TODO: ajouter la LIMIT = [#MAX] -->
-		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" ORDER="rank" />
+		<IF COND="![#MAX]">
+			<LET VAR="max" />9999</LET>
+		</IF>
+		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" LIMIT="0,[#MAX]" ORDER="rank" />
 			<BEFORE>
 				<!-- TODO: revoir tout le markup de ce truc + utiliser des variables de trad -->
 				<section class="revues">
@@ -291,7 +293,7 @@
 
 			<AFTER>
 						</div>
-						<IF COND="[#MAX]">
+						<IF COND="[#NBRESULTS] GT [#MAX]">
 							<div class="lien-catalogue text-center">
 								<a href="#" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">Consulter l'intégralité du catalogue &raquo;</a>
 							</div>
