@@ -60,9 +60,9 @@ section {
 	padding: 40px 0;
 }
 
-.bg-pattern {
+.home .revues {
 	background: #ECEEF0;
-	background: url(../img/bgrevue3.png);
+	background: url(../images/bgrevues.png);
 	border: 1px solid #eee;
 }
 

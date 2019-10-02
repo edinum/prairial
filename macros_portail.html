@@ -259,8 +259,8 @@
 		<!-- TODO: ajouter la LIMIT = [#MAX] -->
 		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" ORDER="rank" />
 			<BEFORE>
-				<!-- TODO: revoir tout le markup de ce truc + utiliser des variables de trad + le background subbtle pattern doit etre optionnel car uniquement sur la home -->
-				<section class="revues bg-pattern">
+				<!-- TODO: revoir tout le markup de ce truc + utiliser des variables de trad -->
+				<section class="revues">
 					<div class="container">
 						<h2 class="section-h">Dernières revues en ligne</h2>
 						<!-- TODO: ici il faut plutôt utiliser un container flexbox https://getbootstrap.com/docs/4.0/utilities/flex/ -->
