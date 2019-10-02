@@ -11,7 +11,7 @@
  * Ouverture de la page.
  * @param {string} [titre_page] - Titre de la page à ajouter à la balise title.
  */
-<DEFFUNC NAME="PAGE_START" OPTIONAL="titre_page">
+<DEFFUNC NAME="PAGE_START" OPTIONAL="titre_page, body_class">
 	<!DOCTYPE html>
 	<html lang="fr">
 		<head>
@@ -20,7 +20,10 @@
 			<MACRO NAME="METAS" />
 			<MACRO NAME="CSS" />
 		</head>
-		<body>
+		<IF COND="[#BODY_CLASS]">
+			<LET VAR="body_class_attr">class="[#BODY_CLASS]"</LET>
+		</IF>
+		<body [#BODY_CLASS_ATTR]>
 			<MACRO NAME="MAIN_HEADER" />
 			<FUNC NAME="NAV" IDENTIFIER="menu-principal" CLASSNAME="main-nav" />
 </DEFFUNC>
