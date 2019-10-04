@@ -218,7 +218,7 @@
 					<IF COND="[#CIBLE|trim] NE '.'"><a href="[#CIBLE|trim]"></IF>
 						<div class="d-flex flex-row w-100 justify-content-center align-items-center">
 							<IF COND="[#VIGNETTE]">
-								<img src="[#VIGNETTE]" alt="" class="list-img">
+								<img src="[#VIGNETTE|vignette(200)]" alt="" class="list-img">
 							</IF>
 							<div class="list-text">
 								<h5 class="mb-1">[#TITRE]</h5>
@@ -273,7 +273,7 @@
 				<div class="col-md-4">
 					<div class="card">
 						<IF COND="[#VIGNETTE]">
-							<img class="card-img-top" src="[#VIGNETTE]" alt="" />
+							<img class="card-img-top" src="[#VIGNETTE|vignette(700)]" alt="" />
 						</IF>
 						<div class="card-body">
 							<h5 class="card-title">[#TITRE]</h5>
@@ -328,7 +328,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<IF COND="[#VIGNETTE]">
-						<img src="[#VIGNETTE]" class="img-fluid" alt="">
+						<img src="[#VIGNETTE|vignette(800)]" class="img-fluid" alt="">
 					</IF>
 				</div>
 				<div class="col-md-6">
@@ -354,7 +354,7 @@
 				<a href="[#ID|makeurlwithid]">
 					<h3>[#TITRE]</h3>
 					<IF COND="[#VIGNETTE]">
-						<img src="[#VIGNETTE]" class="img-fluid" alt="">
+						<img src="[#VIGNETTE|vignette(600)]" class="img-fluid" alt="">
 					</IF>
 					<div class="actu-date">[#DATEPUBLI]</div>
 				</a>
