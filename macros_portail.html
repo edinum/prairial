@@ -333,9 +333,11 @@
 						<img src="[#VIGNETTE|vignette(800)]" class="img-fluid" alt="">
 					</IF>
 				</div>
-				<div class="col-md-6">
-					<h3>[#TITRE]</h3>
-					<div class="actu-date">[#DATEPUBLI]</div>
+				<div class="col-md-6 actu">
+					<h3 class="actu-titre">[#TITRE]</h3>
+					<IF COND="[#DATE]">
+						<div class="actu-date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
 					<IF COND="[#TEXTE]">
 						<p class="lead">[#TEXTE|removetags('p')|cuttext(500)]</p>
 						<IF COND="[#TEXTE|hasbeencut]">
@@ -353,11 +355,13 @@
 
 			<div class="col-md-4">
 				<a href="[#ID|makeurlwithid]">
-					<h3>[#TITRE]</h3>
 					<IF COND="[#VIGNETTE]">
 						<img src="[#VIGNETTE|vignette(600)]" class="img-fluid" alt="">
 					</IF>
-					<div class="actu-date">[#DATEPUBLI]</div>
+					<h3 class="actu-titre">[#TITRE]</h3>
+					<IF COND="[#DATE]">
+						<div class="actu-date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
 				</a>
 			</div>
 
