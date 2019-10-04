@@ -263,11 +263,9 @@
 		</IF>
 		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" LIMIT="0,[#MAX]" ORDER="rank" />
 			<BEFORE>
-				<!-- TODO: revoir tout le markup de ce truc + utiliser des variables de trad -->
 				<section class="revues">
 					<div class="container">
-						<h2 class="section-h">Dernières revues en ligne</h2>
-						<!-- TODO: ici il faut plutôt utiliser un container flexbox https://getbootstrap.com/docs/4.0/utilities/flex/ -->
+						<h2 class="section-h">[@REVUES_RECENTES]</h2>
 						<div class="row">
 			</BEFORE>
 
@@ -287,7 +285,7 @@
 							</IF>
 						</div>
 						<div class="card-footer text-center">
-							<a href="[#URL]">Visiter le site</a>
+							<a href="[#URL]">[@VISITER]</a>
 						</div>
 					</div>
 				</div>
@@ -297,7 +295,7 @@
 						</div>
 						<IF COND="[#NBRESULTS] GT [#MAX]">
 							<div class="lien-catalogue text-center">
-								<a href="#" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">Consulter l'intégralité du catalogue &raquo;</a>
+								<a href="index.php?identifier=catalogue" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">[@CONSULTER_LE_CATALOGUE] &raquo;</a>
 							</div>
 						</IF>
 					</div>
@@ -323,7 +321,7 @@
 		<BEFORE>
 			<section class="actus">
 				<div class="container">
-					<h2 class="section-h">Actualités du portail</h2>
+					<h2 class="section-h">[@ACTUALITES]</h2>
 		</BEFORE>
 
 		<DOFIRST>
@@ -339,10 +337,7 @@
 						<div class="actu-date">[#DATE|formateddate("%d %B %Y")]</div>
 					</IF>
 					<IF COND="[#TEXTE]">
-						<p class="lead">[#TEXTE|removetags('p')|cuttext(500)]</p>
-						<IF COND="[#TEXTE|hasbeencut]">
-							<a class="btn btn-outline-primary btn-lg mt-2" href="[#ID|makeurlwithid]">[@LIRE_LA_SUITE]</a>
-						</IF>
+						<p class="lead">[#TEXTE|removetags('p')|cuttext(300)]<IF COND="[#TEXTE|hasbeencut]">… <a href="[#ID|makeurlwithid]">[@LIRE_LA_SUITE]&nbsp;&raquo;</a></IF></p>
 					</IF>
 				</div>
 			</div>
