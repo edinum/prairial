@@ -93,3 +93,12 @@ section {
 .other-actus img {
 	margin-bottom: 20px;
 }
+
+.main-footer {
+	border-top: 8px solid #7553A8;
+}
+
+.logos-img {
+	max-width: 200px;
+	max-height: 200px;
+}

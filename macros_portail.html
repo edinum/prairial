@@ -112,9 +112,19 @@
  * Pied de page.
  */
 <DEFMACRO NAME="FOOTER">
-	<footer class="py-5 mt-5 bg-dark">
+	<footer class="main-footer py-5 mt-5 bg-dark">
 		<div class="container text-center text-white">
-			<FUNC NAME="NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" />
+			<div class="row">
+				<div class="col-md-4">
+					<FUNC NAME="LOGOS" IDENTIFIER="tutelles" />
+				</div>
+				<div class="col-md-4">
+					<FUNC NAME="LOGOS" IDENTIFIER="partenaires" />
+				</div>
+				<div class="col-md-4">
+					<FUNC NAME="NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" />
+				</div>
+			</div>
 		</div>
 	</footer>
 </DEFMACRO>
@@ -153,6 +163,35 @@
 						</div>
 					</div>
 				</nav>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Insertion des logos partenaires.
+ * @param {sting} identifier - Identifiant de la publication parente.
+ */
+<DEFFUNC NAME="LOGOS" REQUIRED="identifier" OPTIONAL="classname" >
+	<LOOP NAME="logos_parent" TABLE="publications" WHERE="identifier='[#IDENTIFIER]'" SELECT="id, titre AS titreparent" LIMIT="0,1" />
+		<LOOP NAME="logos" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" SELECT="titre, url, vignette" ORDER="rank" />
+			<BEFORE>
+				<div class="logos [#CLASSNAME]">
+					<IF COND="[#TITREPARENT]">
+						<h2 class="footer-section-title">[#TITREPARENT]</h2>
+					</IF>
+			</BEFORE>
+
+			<DO>
+				<IF COND="[#URL]">
+					<a href="[#URL]"><img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" /></a>
+				<ELSE />
+					<img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" />
+				</IF>
+			</DO>
+
+			<AFTER>
+				</div>
 			</AFTER>
 		</LOOP>
 	</LOOP>
