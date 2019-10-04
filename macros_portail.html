@@ -339,10 +339,9 @@
 					<IF COND="[#TEXTE]">
 						<p class="lead">[#TEXTE|removetags('p')|cuttext(500)]</p>
 						<IF COND="[#TEXTE|hasbeencut]">
-							<a href="[#ID|makeurlwithid]" title="[@LIRE_LA_SUITE]">(&#8230;)</a>
+							<a class="btn btn-outline-primary btn-lg mt-2" href="[#ID|makeurlwithid]">[@LIRE_LA_SUITE]</a>
 						</IF>
 					</IF>
-					<div class="btn btn-outline-primary btn-lg mt-2">[@LIRE_ACTUALITE]</div>
 				</div>
 			</div>
 		</DOFIRST>
