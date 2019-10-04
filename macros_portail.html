@@ -319,7 +319,7 @@
  */
 <DEFMACRO NAME="HOME_ACTUALITES">
 	<!--[ TODO: ajouter une date d'expiration ]-->
-	<LOOP NAME="home_actualites" TABLE="textessimples" WHERE="type='billetactualite'" SELECT="id, titre, texte, datedexpiration, vignette" LIMIT="0,4" ORDER="rank" />
+	<LOOP NAME="home_actualites" TABLE="textessimples" WHERE="type = 'billetactualite' AND (!datedexpiration OR datedexpiration >= CURDATE())" SELECT="id, titre, texte, date, vignette" LIMIT="0,3" ORDER="rank" />
 		<BEFORE>
 			<section class="actus">
 				<div class="container">
@@ -362,6 +362,13 @@
 			</div>
 
 			<IF COND="[#COUNT] EQ [#NBRESULTS]">
+					<!--[ Bloc "Toutes les actualités" ]-->
+					<div class="col-md-4">
+						<a href="index.php?identifier=actualites">
+							<img src="tpl/images/actus-plus.jpg" class="img-fluid" alt="">
+							<h3 class="actu-titre">[@TOUTES_LES_ACTUS]</h3>
+						</a>
+					</div>
 				</div>
 			</IF>
 		</DO>
