@@ -273,7 +273,7 @@
 				<div class="col-md-4">
 					<div class="card">
 						<IF COND="[#VIGNETTE]">
-							<img class="card-img-top" src="[#VIGNETTE|vignette(700)]" alt="" />
+							<a href="[#URL]"><img class="card-img-top" src="[#VIGNETTE|vignette(700)]" alt="" /></a>
 						</IF>
 						<div class="card-body">
 							<h5 class="card-title">[#TITRE]</h5>
@@ -283,9 +283,9 @@
 							<IF COND="[#TEXTE]">
 								<p class="card-text">[#TEXTE]</p>
 							</IF>
-							<div class="card-link-container">
-								<a href="[#URL]" class="card-link btn btn-outline-secondary">Visiter le site</a>
-							</div>
+						</div>
+						<div class="card-footer text-center">
+							<a href="[#URL]">Visiter le site</a>
 						</div>
 					</div>
 				</div>

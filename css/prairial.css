@@ -67,16 +67,7 @@ section {
 }
 
 .card {
-	height: 480px;
-	position: relative;
-}
-
-.card-link-container {
-	position: absolute;
-	bottom: 20px;
-	left: 0;
-	right: 0;
-	text-align: center;
+	height: 100%;
 }
 
 .other-actus {
