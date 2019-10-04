@@ -218,7 +218,9 @@
 					<IF COND="[#CIBLE|trim] NE '.'"><a href="[#CIBLE|trim]"></IF>
 						<div class="d-flex flex-row w-100 justify-content-center align-items-center">
 							<IF COND="[#VIGNETTE]">
-								<img src="[#VIGNETTE|vignette(200)]" alt="" class="list-img">
+								<div class="list-img-container">
+									<img class="list-img" src="[#VIGNETTE|vignette(200)]" alt="" />
+								</div>
 							</IF>
 							<div class="list-text">
 								<h5 class="mb-1">[#TITRE]</h5>
