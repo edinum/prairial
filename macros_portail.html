@@ -173,7 +173,7 @@
  * @param {sting} identifier - Identifiant de la publication parente.
  */
 <DEFFUNC NAME="LOGOS" REQUIRED="identifier" OPTIONAL="classname" >
-	<LOOP NAME="logos_parent" TABLE="publications" WHERE="identifier='[#IDENTIFIER]'" SELECT="id, titre AS titreparent" LIMIT="0,1" />
+	<LOOP NAME="logos_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='[#IDENTIFIER]'" SELECT="id, titre AS titreparent" LIMIT="0,1" />
 		<LOOP NAME="logos" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" SELECT="titre, url, vignette" ORDER="rank" />
 			<BEFORE>
 				<div class="logos [#CLASSNAME]">
@@ -296,7 +296,7 @@
 	<IF COND="[#FILTRES]">
 		<MACRO NAME="CATALOGUE_FILTRES" />
 	</IF>
-	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='collection' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
+	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
 		<IF COND="![#MAX]">
 			<LET VAR="max" />9999</LET>
 		</IF>
