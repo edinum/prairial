@@ -7,6 +7,10 @@ body {
 	padding-bottom: 50px;
 }
 
+.hidden {
+	display: none;
+}
+
 .main-header {
 	background: #fff;
 	padding: 20px;
