@@ -219,7 +219,7 @@
  */
 <DEFMACRO NAME="HOME_MAIN">
 	<MACRO NAME="HOME_PRESENTATION" />
-	<FUNC NAME="CATALOGUE" MAX="3" />
+	<FUNC NAME="CATALOGUE" MAX="3" TITRE_SECTION="[@REVUES_RECENTES]" />
 	<MACRO NAME="HOME_ACTUALITES" />
 </DEFMACRO>
 
@@ -296,8 +296,9 @@
  * Catalogue.
  * @param {string} [max] - Nombre maximum de volumes affichés.
  * @param {boolean} [filtres] - Afficher les filtres dynamiques.
+ * @param {boolean} [titre_section] - Titre à afficher avant le catalogue.
  */
-<DEFFUNC NAME="CATALOGUE" OPTIONAL="max, filtres">
+<DEFFUNC NAME="CATALOGUE" OPTIONAL="max, filtres, titre_section">
 	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
 		<IF COND="![#MAX]">
 			<LET VAR="max" />9999</LET>
@@ -306,7 +307,9 @@
 			<BEFORE>
 				<section class="revues">
 					<div class="container">
-						<h2 class="section-h">[@REVUES_RECENTES]</h2>
+						<IF COND="[#TITRE_SECTION]">
+							<h2 class="section-h">[#TITRE_SECTION]</h2>
+						</IF>
 						<IF COND="[#FILTRES]">
 							<MACRO NAME="CATALOGUE_FILTRES" />
 						</IF>
@@ -472,5 +475,5 @@
  * Page catalogue.
  */
 <DEFMACRO NAME="CATALOGUE_MAIN" >
-	<FUNC NAME="CATALOGUE" FILTRES="1" />
+	<FUNC NAME="CATALOGUE" FILTRES="1" TITRE_SECTION="[#TITRE]" />
 </DEFMACRO>
