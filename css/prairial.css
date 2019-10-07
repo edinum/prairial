@@ -1,5 +1,10 @@
 body {
+	background: #343a40;
+}
+
+.main-container {
 	background: #F6F8FA;
+	padding-bottom: 50px;
 }
 
 .hidden {
@@ -100,6 +105,8 @@ section {
 
 .main-footer {
 	border-top: 8px solid #7553A8;
+	padding-top: 50px;
+	padding-bottom: 50px;
 }
 
 .logos-img {
