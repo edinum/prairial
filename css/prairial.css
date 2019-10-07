@@ -85,7 +85,7 @@ section {
 	padding: 40px 0;
 }
 
-.home .revues {
+.tpl-home .revues, .tpl-catalogue .main-container {
 	background: #ECEEF0;
 	background: url(../images/bgrevues.png);
 	border: 1px solid #eee;
