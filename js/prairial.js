@@ -11,6 +11,7 @@
 
     if (selectedTags.length === 0) {
       $(".revue").removeClass("hidden");
+      updateUi();
       return;
     }
 
@@ -22,7 +23,14 @@
       $(this).toggleClass("hidden", !keepVisible);
     });
 
-    $(".revues-aucun-resultat").toggleClass("hidden", $(".revue:not(.hidden)").length > 0);
+    updateUi();
+  }
+
+  function updateUi() {
+    var visibleLength = $(".revue:not(.hidden)").length;
+    var hiddenLength = $(".revue.hidden").length;
+    $(".revues-aucun-resultat").toggleClass("hidden", visibleLength > 0);
+    $("#filter-reset").toggleClass("hidden", hiddenLength === 0);
   }
 
   function resetFilters() {
