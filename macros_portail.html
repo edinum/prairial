@@ -377,7 +377,7 @@
 						<LOOP NAME="catalogue_filters_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="type, title, id" ORDER="rank" />
 							<LOOP NAME="catalogue_filters_entries" TABLE="entries" WHERE="idtype = '[#ID]'" SELECT="id, g_name" ORDER="g_name" />
 								<BEFORE>
-									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control">
+									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control custom-select">
 									<option value="">[#TITLE]</option>
 								</BEFORE>
 								<DO> 
