@@ -93,6 +93,9 @@
 
 	<!--[ Bootstrap ]-->
 	<script src="tpl/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!--[ Site ]-->
+	<script src="tpl/js/prairial.js"></script>
 </DEFMACRO>
 
 /**
@@ -293,9 +296,6 @@
  * @param {boolean} [filtres] - Afficher les filtres dynamiques.
  */
 <DEFFUNC NAME="CATALOGUE" OPTIONAL="max, filtres">
-	<IF COND="[#FILTRES]">
-		<MACRO NAME="CATALOGUE_FILTRES" />
-	</IF>
 	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
 		<IF COND="![#MAX]">
 			<LET VAR="max" />9999</LET>
@@ -305,11 +305,26 @@
 				<section class="revues">
 					<div class="container">
 						<h2 class="section-h">[@REVUES_RECENTES]</h2>
+						<IF COND="[#FILTRES]">
+							<MACRO NAME="CATALOGUE_FILTRES" />
+						</IF>
 						<div class="row">
 			</BEFORE>
 
 			<DO>
-				<div class="col-md-4">
+				<LET VAR="revue_tags" GLOBAL="1" /></LET>
+				<LOOP NAME="catalogue_issue_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="id AS idtype"
+					ORDER="rank" />
+					<LOOP NAME="catalogue_issue_entry" TABLE="entries" SELECT="id" WHERE="idtype = '[#IDTYPE]' AND iddocument = '[#ID]'">
+						<IF COND="[%REVUE_TAGS]">
+							<LET VAR="revue_tags" GLOBAL="1" />[%REVUE_TAGS],[#ID]</LET>
+						<ELSE />
+							<LET VAR="revue_tags" GLOBAL="1" />[#ID]</LET>
+						</IF>
+					</LOOP>
+				</LOOP>
+
+				<div class="revue col-md-4" data-tags="[%REVUE_TAGS]">
 					<div class="card">
 						<IF COND="[#VIGNETTE]">
 							<a href="[#URL]"><img class="card-img-top" src="[#VIGNETTE|vignette(700)]" alt="" /></a>
@@ -332,6 +347,9 @@
 
 			<AFTER>
 						</div>
+						<IF COND="[#FILTRES]">
+							<div class="revues-aucun-resultat hidden">[@REVUES_AUCUN_RESULTAT]</div>
+						</IF>
 						<IF COND="[#NBRESULTS] GT [#MAX]">
 							<div class="lien-catalogue text-center">
 								<a href="./?identifier=catalogue" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">[@CONSULTER_LE_CATALOGUE] &raquo;</a>
@@ -348,7 +366,29 @@
  * Filtres du catalogue.
  */
 <DEFMACRO NAME="CATALOGUE_FILTRES">
-	Filtres.
+	<div id="filters" class="filters">
+		<nav class="filters-navbar navbar navbar-default justify-content-start">
+			<div class="navbar-brand">[@FILTRER]</div>
+			<form class="navbar-form navbar-left ">
+				<div class="form-group d-flex">
+						<LOOP NAME="catalogue_filters_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="type, title, id" ORDER="rank" />
+							<LOOP NAME="catalogue_filters_entries" TABLE="entries" WHERE="idtype = '[#ID]'" SELECT="id, g_name" ORDER="g_name" />
+								<BEFORE>
+									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control">
+									<option value="">[#TITLE]</option>
+								</BEFORE>
+								<DO> 
+									<option value="[#ID|makeurlwithid]">[#G_NAME]</option>
+								</DO>
+								<AFTER>
+									</select>
+								</AFTER>
+							</LOOP>
+						</LOOP>
+					</div>
+				</form>
+		</nav>
+	</div>
 </DEFMACRO>
 
 /**

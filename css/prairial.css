@@ -2,6 +2,10 @@ body {
 	background: #F6F8FA;
 }
 
+.hidden {
+	display: none;
+}
+
 .main-header {
 	background: #fff;
 	padding: 20px;
