@@ -30,7 +30,7 @@
   }
 
   $(function () {
-    updateFilters();
+    resetFilters();
     $(".filter-control").on("change", updateFilters);
     $("#filter-reset").on("click", resetFilters);
   });
