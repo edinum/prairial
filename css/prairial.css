@@ -91,6 +91,16 @@ section {
 	border: 1px solid #eee;
 }
 
+.revues-container {
+	opacity: 1;
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.revues-container.loading {
+	opacity: 0;
+}
+
 .card {
 	height: 100%;
 }
