@@ -4,7 +4,16 @@ body {
 
 .main-container {
 	background: #F6F8FA;
+	padding-top: 1px;
 	padding-bottom: 50px;
+}
+
+.tpl-article .main-container {
+	padding-top: 50px;
+}
+
+.tpl-actualites .main-container {
+	padding-top: 20px;
 }
 
 .hidden {
@@ -105,11 +114,11 @@ section {
 	height: 100%;
 }
 
-.other-actus {
+.actus-grid {
 	margin-top: 30px;
 }
 
-.other-actus img {
+.actus-grid img {
 	margin-bottom: 20px;
 }
 
@@ -165,10 +174,6 @@ section {
 	max-width: 100%;
 	margin: 0 auto;
 	display: block;
-}
-
-.tpl-article .main-container {
-	padding-top: 50px;
 }
 
 img.texte-vignette {

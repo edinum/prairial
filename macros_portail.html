@@ -296,7 +296,7 @@
 
 /**
  * Catalogue.
- * @param {string} [max] - Nombre maximum de volumes affichés.
+ * @param {number} [max] - Nombre maximum de volumes affichés.
  * @param {boolean} [filtres] - Afficher les filtres dynamiques.
  * @param {boolean} [titre_section] - Titre à afficher avant le catalogue.
  */
@@ -427,7 +427,7 @@
 					</IF>
 				</div>
 			</div>
-			<MACRO NAME="HOME_ACTUALITES_NEXT" />
+			<FUNC NAME="SHOW_ACTUALITES" LIMIT="1,2" />
 		</DO>
 
 		<AFTER>
@@ -439,11 +439,16 @@
 
 /**
  * Actualités qui suivent la première.
+ * @param {string} [limit] - Argument limit de la loop.
  */
-<DEFMACRO NAME="HOME_ACTUALITES_NEXT">
-	<LOOP NAME="home_actualites_next" TABLE="textessimples" WHERE="type = 'billetactualite' AND (!datedexpiration OR datedexpiration >= CURDATE())" SELECT="id, titre, texte, date, vignette" LIMIT="1,2" ORDER="date DESC" />
+<DEFFUNC NAME="SHOW_ACTUALITES" OPTIONAL="limit">
+	<IF COND="![#LIMIT]">
+		<LET VAR="limit" />9999</LET>
+	</IF>
+
+	<LOOP NAME="show_actualites" TABLE="textessimples" WHERE="type = 'billetactualite' AND (!datedexpiration OR datedexpiration >= CURDATE())" SELECT="id, titre, texte, date, vignette" LIMIT="[#LIMIT]" ORDER="date DESC" />
 		<BEFORE>
-			<div class="row other-actus">
+			<div class="row actus-grid">
 		</BEFORE>
 
 		<DO>
@@ -461,17 +466,19 @@
 		</DO>
 			
 		<AFTER>
-				<!--[ Bloc "Toutes les actualités" ]-->
-				<div class="col-md-4">
-					<a href="./?identifier=actualites">
-						<img src="tpl/images/actus-plus.jpg" class="img-fluid" alt="">
-						<h3 class="actu-titre">[@TOUTES_LES_ACTUS]</h3>
-					</a>
-				</div>
+				<IF COND="[#LIMIT] NE '9999'">
+					<!--[ Bloc "Toutes les actualités" ]-->
+					<div class="col-md-4">
+						<a href="./?identifier=actualites">
+							<img src="tpl/images/actus-plus.jpg" class="img-fluid" alt="">
+							<h3 class="actu-titre">[@TOUTES_LES_ACTUS]</h3>
+						</a>
+					</div>
+				</IF>
 			</div>
 		</AFTER>
 	</LOOP>
-</DEFMACRO>
+</DEFFUNC>
 
 /**
  * Page catalogue.
@@ -509,5 +516,18 @@
 				</IF>
 			</div>
 		</div>
+	</div>
+</DEFMACRO>
+
+/**
+ * Page de présentation de toutes les actualités du site.
+ */
+<DEFMACRO NAME="ACTUALITES_MAIN">
+	<div class="container">
+		<h1 class="section-h">[#TITRE]</h1>
+		<div class="row">
+			<FUNC NAME="SHOW_ACTUALITES" />
+		</div>
+		<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
 	</div>
 </DEFMACRO>
