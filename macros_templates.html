@@ -1,0 +1,318 @@
+<CONTENT VERSION="1.0" LANG="fr" CHARSET="utf-8" />
+
+/**
+ * Template index.html
+ */
+<DEFMACRO NAME="HOME_MAIN">
+	<MACRO NAME="HOME_PRESENTATION" />
+	<FUNC NAME="SHOW_CATALOGUE" MAX="3" TITRE_SECTION="[@REVUES_RECENTES]" />
+	<MACRO NAME="HOME_ACTUALITES" />
+</DEFMACRO>
+
+/**
+ * Template catalogue.html
+ */
+<DEFMACRO NAME="CATALOGUE_MAIN" >
+	<FUNC NAME="SHOW_CATALOGUE" FILTRES="1" TITRE_SECTION="[#TITRE]" />
+</DEFMACRO>
+
+/**
+ * Template actualites.html
+ */
+<DEFMACRO NAME="ACTUALITES_MAIN">
+	<div class="container">
+		<h1 class="section-h">[#TITRE]</h1>
+		<div class="row">
+			<FUNC NAME="SHOW_ACTUALITES" />
+		</div>
+		<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+	</div>
+</DEFMACRO>
+
+/**
+* Template article.html
+*/
+<DEFMACRO NAME="ARTICLE_MAIN">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-8 offset-lg-2">
+				<div class="article">
+					<div class="titre">[#TITRE|removenotes]</div>
+					<IF COND="[#SOUSTITRE]">
+						<div class="soustitre">[#SOUSTITRE|removenotes]</div>
+					</IF>
+					<IF COND="[#TYPE] EQ 'billetactualite' AND [#DATE]">
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
+					<div class="texte-container">
+						<IF COND="[#VIGNETTE]">
+							<img class="texte-vignette" src="[#VIGNETTE]" alt="">
+						</IF>
+						[#TEXTE|removenotes]
+					</div>
+				</div>
+				<IF COND="[#TYPE] EQ 'billetactualite'">
+					<a href="./" class="retour">&lt; [@RETOUR_ACTUALITES]</a>
+					<ELSE />
+					<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+				</IF>
+			</div>
+		</div>
+	</div>
+</DEFMACRO>
+
+/**
+ * Présentation du portail sur la home.
+ */
+<DEFMACRO NAME="HOME_PRESENTATION">
+	<LOOP NAME="home_presentation_parent" TABLE="publications" WHERE="type='menu' AND identifier='presentation'" SELECT="id" LIMIT="0,1" />
+		<LOOP NAME="home_presentation_elements" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre, description, vignette" ORDER="rank" />
+			<BEFORE>
+				<section class="presentation">
+					<div class="container">
+						<div class="jumbotron border my-4">
+							<div class="row">
+			</BEFORE>
+
+			<DOFIRST>
+				<div class="col-md-6">
+					<h1 class="jumbotron-h">[#TITRE]</h1>
+					<IF COND="[#DESCRIPTION]">
+						<p class="lead">[#DESCRIPTION]</p>
+					</IF>
+					<LET VAR="cible" /><FUNC NAME="PAGE_NAV_CIBLE" ID="[#ID]" /></LET>
+					<IF COND="[#CIBLE|trim] NE '.'">
+						<div class="btn btn-outline-primary btn-lg mt-2">
+							<a href="[#CIBLE|trim]">[@EN_SAVOIR_PLUS]</a>
+						</div>
+					</IF>
+				</div>
+			</DOFIRST>
+
+			<DO>
+				<IF COND="[#COUNT] EQ 2">
+					<div class="col-md-6">
+						<div class="list-group list-group-flush">
+				</IF>
+
+				<div class="list-group-item list-group-item-action flex-column align-items-center">
+					<LET VAR="cible" /><FUNC NAME="PAGE_NAV_CIBLE" ID="[#ID]" /></LET>
+					<IF COND="[#CIBLE|trim] NE '.'"><a href="[#CIBLE|trim]"></IF>
+						<div class="d-flex flex-row w-100 justify-content-center align-items-center">
+							<IF COND="[#VIGNETTE]">
+								<div class="list-img-container">
+									<img class="list-img" src="[#VIGNETTE|vignette(200)]" alt="" />
+								</div>
+							</IF>
+							<div class="list-text">
+								<h5 class="mb-1">[#TITRE]</h5>
+								<IF COND="[#DESCRIPTION]">
+									<p class="mb-1">[#DESCRIPTION]</p>
+								</IF>
+							</div>
+						</div>
+					<IF COND="[#CIBLE|trim] NE '.'"></a></IF>
+				</div>
+				
+				<IF COND="[#COUNT] EQ [#NBRESULTS]">
+						</div>
+					</div>
+				</IF>
+			</DO>
+
+			<AFTER>
+							</div>
+						</div>
+					</div>
+				</section>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFMACRO>
+
+/**
+ * Actualités affichées sur la home.
+ */
+<DEFMACRO NAME="HOME_ACTUALITES">	
+	<LOOP NAME="home_actualites" TABLE="textessimples" WHERE="type = 'billetactualite' AND (!datedexpiration OR datedexpiration >= CURDATE())" SELECT="id, titre, texte, date, vignette" LIMIT="0,1" ORDER="date DESC" />
+		<BEFORE>
+			<section class="actus">
+				<div class="container">
+					<h2 class="section-h">[@ACTUALITES]</h2>
+		</BEFORE>
+
+		<DO>
+			<div class="row">
+				<div class="col-md-6">
+					<IF COND="[#VIGNETTE]">
+						<img src="[#VIGNETTE|vignette(800)]" class="img-fluid" alt="">
+					</IF>
+				</div>
+				<div class="col-md-6">
+					<h3 class="actu-titre">[#TITRE]</h3>
+					<IF COND="[#DATE]">
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
+					<IF COND="[#TEXTE]">
+						<p class="lead">[#TEXTE|removetags('p')|cuttext(300)]<IF COND="[#TEXTE|hasbeencut]">… <a href="[#ID|makeurlwithid]">[@LIRE_LA_SUITE]&nbsp;&raquo;</a></IF></p>
+					</IF>
+				</div>
+			</div>
+			<FUNC NAME="SHOW_ACTUALITES" LIMIT="1,2" />
+		</DO>
+
+		<AFTER>
+				</div>
+			</section>
+		</AFTER>
+	</LOOP>
+</DEFMACRO>
+
+
+/**
+ * Fonction d'affichage du catalogue.
+ * @param {number} [max] - Nombre maximum de volumes affichés.
+ * @param {boolean} [filtres] - Afficher les filtres dynamiques.
+ * @param {boolean} [titre_section] - Titre à afficher avant le catalogue.
+ */
+<DEFFUNC NAME="SHOW_CATALOGUE" OPTIONAL="max, filtres, titre_section">
+	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
+		<IF COND="![#MAX]">
+			<LET VAR="max" />9999</LET>
+		</IF>
+		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" LIMIT="0,[#MAX]" ORDER="rank" />
+			<BEFORE>
+				<section class="revues">
+					<div class="container">
+						<IF COND="[#TITRE_SECTION]">
+							<h2 class="section-h">[#TITRE_SECTION]</h2>
+						</IF>
+						<IF COND="[#FILTRES]">
+							<MACRO NAME="CATALOGUE_FILTRES" />
+						</IF>
+						<div class="row revues-container">
+			</BEFORE>
+
+			<DO>
+				<LET VAR="revue_tags" GLOBAL="1" /></LET>
+				<LOOP NAME="catalogue_issue_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="id AS idtype"
+					ORDER="rank" />
+					<LOOP NAME="catalogue_issue_entry" TABLE="entries" SELECT="id" WHERE="idtype = '[#IDTYPE]' AND iddocument = '[#ID]'">
+						<IF COND="[%REVUE_TAGS]">
+							<LET VAR="revue_tags" GLOBAL="1" />[%REVUE_TAGS],[#ID]</LET>
+						<ELSE />
+							<LET VAR="revue_tags" GLOBAL="1" />[#ID]</LET>
+						</IF>
+					</LOOP>
+				</LOOP>
+
+				<div class="revue col-md-4" data-tags="[%REVUE_TAGS]">
+					<div class="card">
+						<IF COND="[#VIGNETTE]">
+							<a href="[#URL]"><img class="card-img-top" src="[#VIGNETTE|vignette(700)]" alt="" /></a>
+						</IF>
+						<div class="card-body">
+							<h5 class="card-title">[#TITRE]</h5>
+							<IF COND="[#SOUSTITRE]">
+								<h6 class="card-subtitle mb-2 text-muted">[#SOUSTITRE]</h6>
+							</IF>
+							<IF COND="[#TEXTE]">
+								<p class="card-text">[#TEXTE]</p>
+							</IF>
+						</div>
+						<div class="card-footer text-center">
+							<a href="[#URL]">[@VISITER]</a>
+						</div>
+					</div>
+				</div>
+			</DO>
+
+			<AFTER>
+						</div>
+						<IF COND="[#FILTRES]">
+							<div class="revues-aucun-resultat hidden">[@REVUES_AUCUN_RESULTAT]</div>
+						</IF>
+						<IF COND="[#NBRESULTS] GT [#MAX]">
+							<div class="lien-catalogue text-center">
+								<a href="./?identifier=catalogue" class="btn btn-lg btn-primary ml-auto mr-auto mt-4">[@CONSULTER_LE_CATALOGUE] &raquo;</a>
+							</div>
+						</IF>
+					</div>
+				</section>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Filtres du catalogue.
+ */
+<DEFMACRO NAME="CATALOGUE_FILTRES">
+	<div id="filters" class="filters">
+		<nav class="filters-navbar navbar navbar-default justify-content-start">
+			<div class="navbar-brand">[@FILTRER]</div>
+			<div class="navbar-form navbar-left ">
+				<div class="form-group d-flex">
+						<LOOP NAME="catalogue_filters_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="type, title, id" ORDER="rank" />
+							<LOOP NAME="catalogue_filters_entries" TABLE="entries" WHERE="idtype = '[#ID]'" SELECT="id, g_name" ORDER="g_name" />
+								<BEFORE>
+									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control custom-select">
+									<option value="">[#TITLE]</option>
+								</BEFORE>
+								<DO> 
+									<option value="[#ID|makeurlwithid]">[#G_NAME]</option>
+								</DO>
+								<AFTER>
+									</select>
+								</AFTER>
+							</LOOP>
+						</LOOP>
+						<button id="filter-reset" class="btn btn-link hidden">[@SUPPRIMER_LES_FILTRES]</button>
+					</div>
+				</div>
+		</nav>
+	</div>
+</DEFMACRO>
+
+/**
+ * Fonction d'affichage des actualités en grille.
+ * @param {string} [limit] - Argument limit de la loop.
+ */
+<DEFFUNC NAME="SHOW_ACTUALITES" OPTIONAL="limit">
+	<IF COND="![#LIMIT]">
+		<LET VAR="limit" />9999</LET>
+	</IF>
+
+	<LOOP NAME="show_actualites" TABLE="textessimples" WHERE="type = 'billetactualite' AND (!datedexpiration OR datedexpiration >= CURDATE())" SELECT="id, titre, texte, date, vignette" LIMIT="[#LIMIT]" ORDER="date DESC" />
+		<BEFORE>
+			<div class="row actus-grid">
+		</BEFORE>
+
+		<DO>
+			<div class="col-md-4">
+				<a href="[#ID|makeurlwithid]">
+					<IF COND="[#VIGNETTE]">
+						<img src="[#VIGNETTE|vignette(600)]" class="img-fluid" alt="">
+					</IF>
+					<h3 class="actu-titre">[#TITRE]</h3>
+					<IF COND="[#DATE]">
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
+				</a>
+			</div>
+		</DO>
+			
+		<AFTER>
+				<IF COND="[#LIMIT] NE '9999'">
+					<!--[ Bloc "Toutes les actualités" ]-->
+					<div class="col-md-4">
+						<a href="./?identifier=actualites">
+							<img src="tpl/images/actus-plus.jpg" class="img-fluid" alt="">
+							<h3 class="actu-titre">[@TOUTES_LES_ACTUS]</h3>
+						</a>
+					</div>
+				</IF>
+			</div>
+		</AFTER>
+	</LOOP>
+</DEFFUNC>

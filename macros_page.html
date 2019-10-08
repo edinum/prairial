@@ -1,0 +1,210 @@
+<CONTENT VERSION="1.0" LANG="fr" CHARSET="utf-8" />
+
+/**
+ * Ouverture de la page.
+ * @param {string} [titre_page] - Titre de la page à ajouter à la balise title.
+ */
+<DEFFUNC NAME="PAGE_START" OPTIONAL="titre_page">
+	<!DOCTYPE html>
+	<html lang="fr">
+		<head>
+			<meta charset="utf-8">
+			<title><IF COND="[#TITRE_PAGE]">[#TITRE_PAGE|textebrut] – </IF>[#OPTIONS.METADONNEESSITE.TITRESITE]</title>
+			<MACRO NAME="PAGE_METAS" />
+			<MACRO NAME="PAGE_CSS" />
+		</head>
+		<LET VAR="tpl_class"/>tpl-<IF COND="[#TPL]">[#TPL]<ELSE />home</IF></LET>
+		<body class="[#TPL_CLASS]">
+			<MACRO NAME="PAGE_HEADER" />
+			<FUNC NAME="PAGE_NAV" IDENTIFIER="menu-principal" CLASSNAME="main-nav" />
+			<div class="main-container">
+</DEFFUNC>
+
+/**
+ * Fermeture de la page.
+ */
+<DEFMACRO NAME="PAGE_END">
+			</div>
+			<MACRO NAME="PAGE_FOOTER" />
+			<MACRO NAME="PAGE_JS" />
+		</body>
+	</html>
+</DEFMACRO>
+
+/**
+ * Métadonnées de la page.
+ */
+<DEFMACRO NAME="PAGE_METAS">
+	<meta name="generator" content="Lodel [#VERSION]" />
+	<meta name="url" content="[%SITEINFOS.URL]" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!--[ keywords / DC.subject ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE]">
+		<meta name="keywords" content="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE|textebrut|cleanBadChars|replacequotationmark]" />
+		<meta name="DC.subject" content="[#OPTIONS.METADONNEESSITE.MOTSCLESDUSITE|textebrut|cleanBadChars|replacequotationmark]" />
+	</IF>
+
+	<!--[ description / DC.description ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.DESCRIPTIONSITE]">
+		<LET VAR="description">[#OPTIONS.METADONNEESSITE.DESCRIPTIONSITE|textebrut|cleanBadChars|replacequotationmark]</LET>
+		<meta name="description" content="[#DESCRIPTION]" />
+		<meta name="DC.description" content="[#DESCRIPTION]" />
+	</IF>
+
+	<!--[ DC.rights ]-->
+	<IF COND="[#OPTIONS.METADONNEESSITE.DROITSAUTEUR]">
+		<meta name="DC.rights" content="[#OPTIONS.METADONNEESSITE.DROITSAUTEUR|textebrut|cleanBadChars|replacequotationmark]" />
+	</IF>
+	
+	<!--[ Open Graph ]-->
+	<meta property="og:title" content="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="[%SITEINFOS.URL]" />
+	<IF COND="[%CHEMIN_LOGO]">
+		<meta property="og:image" content="[%CHEMIN_LOGO]" />
+	</IF>
+</DEFMACRO>
+
+/**
+ * Inclusion des CSS.
+ */
+<DEFMACRO NAME="PAGE_CSS">
+	<!--[ Bootstrap ]-->
+	<link href="tpl/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!--[ Prairial ]-->
+	<link href="tpl/css/prairial.css" rel="stylesheet">
+</DEFMACRO>
+
+/**
+ * Inclusion du JS.
+ */
+<DEFMACRO NAME="PAGE_JS">
+	<!--[ JQuery ]-->
+	<script src="tpl/vendor/jquery-3.4.1.min.js"></script>
+
+	<!--[ Bootstrap ]-->
+	<script src="tpl/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!--[ Site ]-->
+	<script src="tpl/js/prairial.js"></script>
+</DEFMACRO>
+
+/**
+ * Bandeau supérieur.
+ */
+<DEFMACRO NAME="PAGE_HEADER">
+	<header class="main-header">
+		<div class="container">
+			<a href="./">
+				<IF COND="[%CHEMIN_LOGO]">
+					<img class="logo" src="[%CHEMIN_LOGO]" alt="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
+				<ELSE />
+					<h1 class="site-title">[#OPTIONS.METADONNEESSITE.TITRESITE]</h1>
+				</IF>
+			</a>
+		</div>
+	</header>
+</DEFMACRO>
+
+/**
+ * Pied de page.
+ */
+<DEFMACRO NAME="PAGE_FOOTER">
+	<footer class="main-footer">
+		<div class="container text-center text-white">
+			<div class="row">
+				<div class="col-md-4">
+					<FUNC NAME="PAGE_LOGOS" IDENTIFIER="tutelles" />
+				</div>
+				<div class="col-md-4">
+					<FUNC NAME="PAGE_LOGOS" IDENTIFIER="partenaires" />
+				</div>
+				<div class="col-md-4">
+					<FUNC NAME="PAGE_NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" />
+				</div>
+			</div>
+		</div>
+	</footer>
+</DEFMACRO>
+
+/**
+ * Insertion d'un menu.
+ * @param {string} identifier - Identifiant du menu.
+ * @param {string} [classname] - Classe ajoutée à l'élément nav.
+ */
+<DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname">
+	<LET VAR="id_page_courante">[#ID]</LET>
+	<LOOP NAME="page_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
+		<LOOP NAME="page_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
+			<BEFORE>
+				<nav class="navbar navbar-expand-lg navbar-center [#CLASSNAME]">
+					<div class="container">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse" id="navbarResponsive">
+							<ul class="navbar-nav ml-auto-off">
+			</BEFORE>
+
+			<DO>
+				<LET VAR="cible" /><FUNC NAME="PAGE_NAV_CIBLE" ID="[#ID]" /></LET>
+				<IF COND="[#CIBLE|trim] EQ [#ID_PAGE_COURANTE] OR ([#CIBLE|trim] EQ '.' AND [#ID_PAGE_COURANTE] EQ '0')">
+					<LET VAR="active_class">active</LET>
+				</IF>
+				<li class="nav-item [#ACTIVE_CLASS]">
+					<a class="nav-link" href="[#CIBLE|trim]">[#TITRE]</a>
+				</li>
+			</DO>
+
+			<AFTER>
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Récupérer la cible d'un élément de menu.
+ * @param {number} id - ID de l'elementdemenu.
+ * Si pas de cible alors on retourne "." pour lier vers l'accueil.
+ */
+<DEFFUNC NAME="PAGE_NAV_CIBLE" REQUIRED="ID">
+	<LOOP NAME="page_nav_cible" TABLE="relations" WHERE="nature='cible' AND id1='[#ID]'" SELECT="id2 AS cible" LIMIT="0,1">
+		<DO>[#CIBLE|makeurlwithid]</DO>
+		<ALTERNATIVE>.</ALTERNATIVE>
+	</LOOP>
+</DEFFUNC>
+
+/**
+ * Insertion des logos partenaires.
+ * @param {sting} identifier - Identifiant de la publication parente.
+ */
+<DEFFUNC NAME="PAGE_LOGOS" REQUIRED="identifier" OPTIONAL="classname" >
+	<LOOP NAME="page_logos_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='[#IDENTIFIER]'" SELECT="id, titre AS titreparent" LIMIT="0,1" />
+		<LOOP NAME="page_logos" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" SELECT="titre, url, vignette" ORDER="rank" />
+			<BEFORE>
+				<div class="logos [#CLASSNAME]">
+					<IF COND="[#TITREPARENT]">
+						<h2 class="footer-section-title">[#TITREPARENT]</h2>
+					</IF>
+			</BEFORE>
+
+			<DO>
+				<IF COND="[#URL]">
+					<a href="[#URL]"><img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" /></a>
+				<ELSE />
+					<img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" />
+				</IF>
+			</DO>
+
+			<AFTER>
+				</div>
+			</AFTER>
+		</LOOP>
+	</LOOP>
+</DEFFUNC>
