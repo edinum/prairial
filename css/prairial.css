@@ -123,3 +123,63 @@ section {
 	max-width: 200px;
 	max-height: 200px;
 }
+
+/* Styles article */
+.titre {
+	font-size: 42px;
+	font-weight: 300;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+}
+
+.soustitre {
+	font-size: 1.25rem;
+	font-weight: 300;
+	margin-bottom: 1rem;
+}
+
+.texte-container {
+	font-size: 1.15rem;
+}
+
+.texte-container h1 {
+	margin: 2rem 0 1rem;
+	font-size: 2rem;
+}
+
+.texte-container h2 {
+	margin: 1.6rem 0 1rem;
+	font-size: 1.6rem;
+}
+
+.texte-container h3 {
+	margin: 1.2rem 0 1rem;
+	font-size: 1.2rem;
+}
+
+.epigraphe, .citation, .citationbis, .citationter {
+	margin-left: 5rem;
+}
+
+.texte-container img {
+	max-width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+
+.titreillustration {
+	font-weight: bold;
+	text-align: center
+}
+
+.legendeillustration, .creditillustration {
+	color: #666;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-size: 1rem;
+}
+
+.retour {
+	display: block;
+	margin-top: 2rem;
+}

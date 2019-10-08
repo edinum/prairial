@@ -16,7 +16,7 @@
 	<html lang="fr">
 		<head>
 			<meta charset="utf-8">
-			<title><IF COND="[#TITRE_PAGE]">[#TITRE_PAGE] – </IF>[#OPTIONS.METADONNEESSITE.TITRESITE]</title>
+			<title><IF COND="[#TITRE_PAGE]">[#TITRE_PAGE|textebrut] – </IF>[#OPTIONS.METADONNEESSITE.TITRESITE]</title>
 			<MACRO NAME="METAS" />
 			<MACRO NAME="CSS" />
 		</head>
@@ -478,4 +478,24 @@
  */
 <DEFMACRO NAME="CATALOGUE_MAIN" >
 	<FUNC NAME="CATALOGUE" FILTRES="1" TITRE_SECTION="[#TITRE]" />
+</DEFMACRO>
+
+/**
+ * Affichage de la page article.
+ */
+<DEFMACRO NAME="ARTICLE_MAIN">
+	<div class="container pt-5">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="article">
+					<div class="titre">[#TITRE|removenotes]</div>
+					<IF COND="[#SOUSTITRE]">
+						<div class="soustitre">[#SOUSTITRE|removenotes]</div>
+					</IF>
+					<div class="texte-container">[#TEXTE|removenotes]</div>
+				</div>
+				<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+			</div>
+		</div>
+	</div>
 </DEFMACRO>
