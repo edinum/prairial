@@ -82,7 +82,7 @@
 					</IF>
 					<LET VAR="cible" /><FUNC NAME="PAGE_NAV_CIBLE" ID="[#ID]" /></LET>
 					<IF COND="[#CIBLE|trim] NE '.'">
-						<div class="btn btn-outline-primary btn-lg mt-2">
+						<div class="presentation-more mt-2">
 							<a href="[#CIBLE|trim]">[@EN_SAVOIR_PLUS]</a>
 						</div>
 					</IF>
@@ -97,7 +97,7 @@
 
 				<div class="list-group-item list-group-item-action flex-column align-items-center">
 					<LET VAR="cible" /><FUNC NAME="PAGE_NAV_CIBLE" ID="[#ID]" /></LET>
-					<IF COND="[#CIBLE|trim] NE '.'"><a href="[#CIBLE|trim]"></IF>
+					<IF COND="[#CIBLE|trim] NE '.'"><a class="presentation-link" href="[#CIBLE|trim]"></IF>
 						<div class="d-flex flex-row w-100 justify-content-center align-items-center">
 							<IF COND="[#VIGNETTE]">
 								<div class="list-img-container">
@@ -149,7 +149,7 @@
 					</IF>
 				</div>
 				<div class="col-md-6">
-					<h3 class="actu-titre">[#TITRE]</h3>
+					<h3 class="actu-titre"><a class="text-reset" href="[#ID|makeurlwithid]">[#TITRE]</a></h3>
 					<IF COND="[#DATE]">
 						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
 					</IF>
@@ -221,7 +221,7 @@
 							</IF>
 						</div>
 						<div class="card-footer text-center">
-							<a href="[#URL]">[@VISITER]</a>
+							<a class="card-footer-link" href="[#URL]">[@VISITER]</a>
 						</div>
 					</div>
 				</div>
@@ -249,7 +249,7 @@
  */
 <DEFMACRO NAME="CATALOGUE_FILTRES">
 	<div id="filters" class="filters">
-		<nav class="filters-navbar navbar navbar-default justify-content-start">
+		<nav class="filters-navbar navbar justify-content-start">
 			<div class="navbar-brand">[@FILTRER]</div>
 			<div class="navbar-form navbar-left ">
 				<div class="form-group d-flex">
@@ -267,7 +267,7 @@
 								</AFTER>
 							</LOOP>
 						</LOOP>
-						<button id="filter-reset" class="btn btn-link hidden">[@SUPPRIMER_LES_FILTRES]</button>
+						<button id="filter-reset" class="filter-reset btn btn-link hidden">[@SUPPRIMER_LES_FILTRES]</button>
 					</div>
 				</div>
 		</nav>
@@ -290,7 +290,7 @@
 
 		<DO>
 			<div class="col-md-4">
-				<a href="[#ID|makeurlwithid]">
+				<a class="text-reset" href="[#ID|makeurlwithid]">
 					<IF COND="[#VIGNETTE]">
 						<img src="[#VIGNETTE|vignette(600)]" class="img-fluid" alt="">
 					</IF>
@@ -306,7 +306,7 @@
 				<IF COND="[#LIMIT] NE '9999'">
 					<!--[ Bloc "Toutes les actualités" ]-->
 					<div class="col-md-4">
-						<a href="./?identifier=actualites">
+						<a class="text-reset" href="./?identifier=actualites">
 							<img src="tpl/images/actus-plus.jpg" class="img-fluid" alt="">
 							<h3 class="actu-titre">[@TOUTES_LES_ACTUS]</h3>
 						</a>

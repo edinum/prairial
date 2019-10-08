@@ -2,6 +2,14 @@ body {
 	background: #343a40;
 }
 
+a, a:visited {
+	color: #7553A8;
+}
+
+a:hover, a:focus, a:active {
+	color: #000;
+}
+
 .main-container {
 	background: #F6F8FA;
 	padding-top: 1px;
@@ -25,21 +33,49 @@ body {
 	padding: 20px;
 }
 
-.main-nav, .btn-primary {
+.main-nav, a.btn-primary {
 	background-color: #7553A8;
-	border-color: #563D7C; 
 	border: none;
+	color: #fff;
+}
+
+.main-nav {
+	padding: 0;
+}
+
+.main-nav .nav-item {
+	padding: 10px 10px 5px 10px;
+	border-bottom: 5px solid transparent;
+	-webkit-transition : border 200ms ease-out;
+  -moz-transition : border 200ms ease-out;
+  -o-transition : border 200ms ease-out;
+  transition : border 200ms ease-out;
+}
+
+.main-nav:not(:hover) .nav-item.active {
+	border-bottom-color: #F5BC00;
+}
+
+.main-nav .nav-item:hover, .main-nav .nav-item:focus {
+	border-bottom-color: #F5BC00;
+}
+
+.main-nav a {
+	color: #fff;
+	font-size: 1.2em;
+}
+
+a.btn-primary:hover, a.btn-primary:focus {
+	background-color: #563D7C; 
+}
+
+.btn-lg {
+	padding: .5rem 1rem .6rem;
 }
 
 .btn-outline-primary {
 	color: #563D7C;
 	border-color: #563D7C;
-}
-
-.main-nav a {
-	color: #eee;
-	font-size: 1.1em;
-	margin-left: 20px;
 }
 
 .logo {
@@ -90,6 +126,24 @@ body {
 	margin-left: 20px;
 }
 
+.list-group-item-action:focus, .list-group-item-action:hover {
+	background: none;
+	border-color: transparent;
+}
+
+.presentation-more {
+	font-size: 1.3rem;
+}
+
+a.presentation-link {
+	color: #000;
+	text-decoration: none;
+}
+
+a.presentation-link:hover, a.presentation-link:focus {
+	color: #7553A8;
+}
+
 section {
 	padding: 40px 0;
 }
@@ -110,6 +164,10 @@ section {
 	opacity: 0;
 }
 
+.revue {
+	margin-bottom: 30px;
+}
+
 .card {
 	height: 100%;
 }
@@ -123,14 +181,37 @@ section {
 }
 
 .main-footer {
+	color: #fff;
 	border-top: 8px solid #7553A8;
 	padding-top: 50px;
 	padding-bottom: 50px;
 }
 
+.main-footer a, .main-footer a:visited {
+	color: #F5BC00;
+}
+
+.main-footer a:hover, .main-footer a:focus {
+	color: #fff;
+}
+
+.main-footer .row > div {
+	border-left: 5px solid #7553A8;
+}
+
+.footer-section-title {
+	font-size: 1.2rem;
+	margin-bottom: 20px;
+}
+
 .logos-img {
 	max-width: 200px;
 	max-height: 200px;
+	opacity: .9;
+}
+
+.logos-img:hover, .logos-img:focus {
+	opacity: 1;
 }
 
 /* Styles article */
@@ -218,4 +299,8 @@ img.texte-vignette {
 .retour {
 	display: block;
 	margin-top: 2rem;
+}
+
+.filter-reset {
+	white-space: nowrap;
 }
