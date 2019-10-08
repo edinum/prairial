@@ -122,7 +122,14 @@
 					<FUNC NAME="PAGE_LOGOS" IDENTIFIER="partenaires" />
 				</div>
 				<div class="col-md-4">
-					<FUNC NAME="PAGE_NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" />
+					<ul class="footer-links">
+						<h2 class="footer-section-title">[@FOOTER_LIENS]</h2>
+						<FUNC NAME="PAGE_NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" NOWRAP="TRUE" />
+						<li class="nav-item"><a class="nav-link" href="https://www.lodel.org/">[@PROPULSE_PAR_LODEL]</a></li>
+						<li class="nav-item"><a class="nav-link" href="./lodel/">[@ADMINISTRATION_DU_SITE]</a></li>
+						<li class="nav-item"><a class="nav-link" href="https://edinum.org">Conception : Edinum.org</a></li>
+					</ul>
+					
 				</div>
 			</div>
 		</div>
@@ -133,19 +140,22 @@
  * Insertion d'un menu.
  * @param {string} identifier - Identifiant du menu.
  * @param {string} [classname] - Classe ajoutée à l'élément nav.
+ * @param {boolean} [nowrap] - Ne pas wrapper les <li> si true.
  */
-<DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname">
+<DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname, use_nav_tag">
 	<LET VAR="id_page_courante">[#ID]</LET>
 	<LOOP NAME="page_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
 		<LOOP NAME="page_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
 			<BEFORE>
-				<nav class="navbar navbar-expand-lg navbar-center [#CLASSNAME]">
-					<div class="container">
-						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse" id="navbarResponsive">
-							<ul class="navbar-nav ml-auto-off">
+				<IF COND="![#NOWRAP]">
+					<nav class="navbar navbar-expand-lg navbar-center [#CLASSNAME]">
+						<div class="container">
+							<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse" id="navbarResponsive">
+								<ul class="navbar-nav ml-auto-off">
+				</IF>
 			</BEFORE>
 
 			<DO>
@@ -159,10 +169,12 @@
 			</DO>
 
 			<AFTER>
-							</ul>
+				<IF COND="![#NOWRAP]">
+								</ul>
+							</div>
 						</div>
-					</div>
-				</nav>
+					</nav>
+				</IF>
 			</AFTER>
 		</LOOP>
 	</LOOP>

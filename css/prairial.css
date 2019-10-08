@@ -199,6 +199,12 @@ section {
 	border-left: 5px solid #7553A8;
 }
 
+.footer-links, .footer-links .nav-link, .footer-links .nav-item {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
 .footer-section-title {
 	font-size: 1.2rem;
 	margin-bottom: 20px;
