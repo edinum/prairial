@@ -65,8 +65,14 @@ a:hover, a:focus, a:active {
 	font-size: 1.2em;
 }
 
-a.btn-primary:hover, a.btn-primary:focus {
-	background-color: #563D7C; 
+a.btn-primary:hover, a.btn-primary:focus, a.btn-primary:active {
+	background-color: #563D7C !important; 
+	border-color: #977CBE !important;
+	outline: none !important;
+}
+
+a.btn-primary:active, a.btn-primary:focus {
+	box-shadow: 0 0 0 4px #CCBFDF !important;
 }
 
 .btn-lg {
@@ -165,7 +171,7 @@ section {
 }
 
 .revue {
-	margin-bottom: 30px;
+	margin-bottom: 40px;
 }
 
 .card {
@@ -307,6 +313,20 @@ img.texte-vignette {
 	margin-top: 2rem;
 }
 
+.filters-navbar {
+	padding: 0;
+	margin-bottom: 40px;
+}
+
+.filter-control {
+	margin: 0 10px;
+}
+
 .filter-reset {
 	white-space: nowrap;
+	color: #7553A8;
+}
+
+.filter-reset:hover, .filter-reset:focus {
+	color: #563D7C;
 }

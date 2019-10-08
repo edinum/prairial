@@ -249,10 +249,10 @@
  */
 <DEFMACRO NAME="CATALOGUE_FILTRES">
 	<div id="filters" class="filters">
-		<nav class="filters-navbar navbar justify-content-start">
-			<div class="navbar-brand">[@FILTRER]</div>
+		<nav class="filters-navbar navbar justify-content-start align-items-center">
+			<div class="navbar-brand">[@FILTRER]&nbsp;:</div>
 			<div class="navbar-form navbar-left ">
-				<div class="form-group d-flex">
+				<div class="d-flex">
 						<LOOP NAME="catalogue_filters_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="type, title, id" ORDER="rank" />
 							<LOOP NAME="catalogue_filters_entries" TABLE="entries" WHERE="idtype = '[#ID]'" SELECT="id, g_name" ORDER="g_name" />
 								<BEFORE>
@@ -267,7 +267,7 @@
 								</AFTER>
 							</LOOP>
 						</LOOP>
-						<button id="filter-reset" class="filter-reset btn btn-link hidden">[@SUPPRIMER_LES_FILTRES]</button>
+						<button id="filter-reset" class="filter-reset btn btn-link hidden">&#10754;&nbsp;[@SUPPRIMER_LES_FILTRES]</button>
 					</div>
 				</div>
 		</nav>
