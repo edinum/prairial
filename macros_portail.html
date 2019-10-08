@@ -104,9 +104,13 @@
 <DEFMACRO NAME="MAIN_HEADER">
 	<header class="main-header">
 		<div class="container">
-			<IF COND="[%CHEMIN_LOGO]">
-				<img class="logo" src="[%CHEMIN_LOGO]" alt="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
-			</IF>
+			<a href="./">
+				<IF COND="[%CHEMIN_LOGO]">
+					<img class="logo" src="[%CHEMIN_LOGO]" alt="[#OPTIONS.METADONNEESSITE.TITRESITE]" />
+				<ELSE />
+					<h1 class="site-title">[#OPTIONS.METADONNEESSITE.TITRESITE]</h1>
+				</IF>
+			</a>
 		</div>
 	</header>
 </DEFMACRO>
