@@ -420,7 +420,7 @@
 				<div class="col-md-6">
 					<h3 class="actu-titre">[#TITRE]</h3>
 					<IF COND="[#DATE]">
-						<div class="actu-date">[#DATE|formateddate("%d %B %Y")]</div>
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
 					</IF>
 					<IF COND="[#TEXTE]">
 						<p class="lead">[#TEXTE|removetags('p')|cuttext(300)]<IF COND="[#TEXTE|hasbeencut]">… <a href="[#ID|makeurlwithid]">[@LIRE_LA_SUITE]&nbsp;&raquo;</a></IF></p>
@@ -454,7 +454,7 @@
 					</IF>
 					<h3 class="actu-titre">[#TITRE]</h3>
 					<IF COND="[#DATE]">
-						<div class="actu-date">[#DATE|formateddate("%d %B %Y")]</div>
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
 					</IF>
 				</a>
 			</div>
@@ -484,17 +484,29 @@
  * Affichage de la page article.
  */
 <DEFMACRO NAME="ARTICLE_MAIN">
-	<div class="container pt-5">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-8 offset-md-2">
+			<div class="col-12 col-lg-8 offset-lg-2">
 				<div class="article">
 					<div class="titre">[#TITRE|removenotes]</div>
 					<IF COND="[#SOUSTITRE]">
 						<div class="soustitre">[#SOUSTITRE|removenotes]</div>
 					</IF>
-					<div class="texte-container">[#TEXTE|removenotes]</div>
+					<IF COND="[#TYPE] EQ 'billetactualite' AND [#DATE]">
+						<div class="date">[#DATE|formateddate("%d %B %Y")]</div>
+					</IF>
+					<div class="texte-container">
+						<IF COND="[#VIGNETTE]">
+							<img class="texte-vignette" src="[#VIGNETTE]" alt="">
+						</IF>
+						[#TEXTE|removenotes]
+					</div>
 				</div>
-				<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+				<IF COND="[#TYPE] EQ 'billetactualite'">
+					<a href="./" class="retour">&lt; [@RETOUR_ACTUALITES]</a>
+				<ELSE />
+					<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+				</IF>
 			</div>
 		</div>
 	</div>

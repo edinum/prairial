@@ -167,6 +167,37 @@ section {
 	display: block;
 }
 
+.tpl-article .main-container {
+	padding-top: 50px;
+}
+
+img.texte-vignette {
+	width: 100%;
+	max-width: 100%;
+	margin: 20px auto;
+}
+
+@media (min-width: 768px) { 
+	img.texte-vignette {
+		max-width: 300px;
+		margin: 0 0 20px 20px;
+		float: right
+	}
+}
+
+@media (min-width: 992px) { 
+	img.texte-vignette {
+		max-width: 400px;
+		margin-right: -100px;
+	}
+}
+
+.date {
+	font-size: 1rem;
+	color: #333;
+	margin-bottom: 10px;
+}
+
 .titreillustration {
 	font-weight: bold;
 	text-align: center
