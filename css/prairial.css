@@ -65,6 +65,15 @@ a:hover, a:focus, a:active {
 	font-size: 1.2em;
 }
 
+.main-nav .navbar-toggler {
+	margin: 0 0 0 auto;
+	padding: 10px;
+}
+
+.main-nav .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
 a.btn-primary:hover, a.btn-primary:focus, a.btn-primary:active {
 	background-color: #563D7C !important; 
 	border-color: #977CBE !important;
@@ -86,6 +95,7 @@ a.btn-primary:active, a.btn-primary:focus {
 
 .logo {
 	display: block;
+	max-width: 100%;
 }
 
 .section-h {
@@ -182,6 +192,10 @@ section {
 	margin-top: 30px;
 }
 
+.actus-grid > div {
+	margin-bottom: 30px;
+}
+
 .actus-grid img {
 	margin-bottom: 20px;
 }
@@ -191,6 +205,10 @@ section {
 	border-top: 8px solid #7553A8;
 	padding-top: 50px;
 	padding-bottom: 50px;
+}
+
+.main-footer-contents > div {
+	margin-bottom: 30px;
 }
 
 .main-footer a, .main-footer a:visited {
