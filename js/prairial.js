@@ -3,16 +3,18 @@
 (function() {
   // Filtres catalogue
   var $container = $(".revues-container");
+  var $items = $(".revue");
+  var transitionDuration = 200;
+  var timer;
 
   function updateFilters() {
     $container.addClass("loading");
-    
-    // FIXME: ajouter un systeme de queue pour pas que le loading se bloque quand on défile trop vite avec le clavier
-    $container.one("transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd", function (e) {
+    window.clearInterval(timer);
+    timer = window.setInterval(function() {
       updateRevues();
       updateUi();
       $container.removeClass("loading");
-    });
+    }, transitionDuration);
   }
 
   function updateRevues() {
@@ -23,11 +25,11 @@
     });
 
     if (selectedTags.length === 0) {
-      $(".revue").removeClass("hidden");
+      $items.removeClass("hidden");
       return;
     }
 
-    $(".revue").each(function () {
+    $items.each(function () {
       var tags = $(this).attr("data-tags").split(",");
       var keepVisible = selectedTags.every(function (value) {
         return tags.indexOf(value) > -1;
