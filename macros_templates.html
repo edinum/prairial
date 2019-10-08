@@ -138,7 +138,7 @@
 		<BEFORE>
 			<section class="actus">
 				<div class="container">
-					<h2 class="section-h">[@ACTUALITES]</h2>
+					<h2 class="section-h"><a class="text-reset" href="./?identifier=actualites">[@ACTUALITES]</a></h2>
 		</BEFORE>
 
 		<DO>
@@ -185,7 +185,7 @@
 				<section class="revues">
 					<div class="container">
 						<IF COND="[#TITRE_SECTION]">
-							<h2 class="section-h">[#TITRE_SECTION]</h2>
+							<h2 class="section-h"><a class="text-reset" href="./?identifier=catalogue">[#TITRE_SECTION]</a></h2>
 						</IF>
 						<IF COND="[#FILTRES]">
 							<MACRO NAME="CATALOGUE_FILTRES" />
