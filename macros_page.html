@@ -142,7 +142,7 @@
  * @param {string} [classname] - Classe ajoutée à l'élément nav.
  * @param {boolean} [nowrap] - Ne pas wrapper les <li> si true.
  */
-<DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname, use_nav_tag">
+<DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname, nowrap">
 	<LET VAR="id_page_courante">[#ID]</LET>
 	<LOOP NAME="page_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
 		<LOOP NAME="page_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
