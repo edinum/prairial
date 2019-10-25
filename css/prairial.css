@@ -196,8 +196,10 @@ section {
 	margin-bottom: 30px;
 }
 
-.actus-grid img {
-	margin-bottom: 20px;
+.actu__img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;
 }
 
 .main-footer {
