@@ -314,3 +314,25 @@
 		</AFTER>
 	</LOOP>
 </DEFFUNC>
+
+/**
+ * Erreur 404.
+ */
+<DEFMACRO NAME="ERREUR_404">
+	<div class="container">
+		<h1 class="section-h">[@ERREUR_404]</h1>
+		<p class="error error-404">[@PAGE_NOT_FOUND]</p>
+		<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+	</div>
+</DEFMACRO>
+
+/**
+* Erreur 500.
+*/
+<DEFMACRO NAME="ERREUR_500">
+	<div class="container">
+		<h1 class="section-h">[@ERREUR_500]</h1>
+		<p class="error error-500">[@INTERNAL_ERROR]</p>
+		<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
+	</div>
+</DEFMACRO>
