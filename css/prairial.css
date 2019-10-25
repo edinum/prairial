@@ -43,7 +43,29 @@ a:hover, a:focus, a:active {
 	padding: 0;
 }
 
+.main-nav .navbar-collapse {
+	padding: 0 5px 20px 10px;
+}
+
+.main-nav a {
+	color: #fff;
+	font-size: 1.1em;
+}
+
 .main-nav .nav-item {
+	padding: 5px;
+}
+
+@media (min-width: 992px) { 
+	.main-nav .navbar-collapse {
+		padding: 0;
+	}
+
+	.main-nav a {
+		font-size: 1.2em;
+	}
+
+	.main-nav .nav-item {
 	padding: 10px 10px 5px 10px;
 	border-bottom: 5px solid transparent;
 	-webkit-transition : border 200ms ease-out;
@@ -59,11 +81,8 @@ a:hover, a:focus, a:active {
 .main-nav .nav-item:hover, .main-nav .nav-item:focus {
 	border-bottom-color: #F5BC00;
 }
-
-.main-nav a {
-	color: #fff;
-	font-size: 1.2em;
 }
+
 
 .main-nav .navbar-toggler {
 	margin: 0 0 0 auto;
