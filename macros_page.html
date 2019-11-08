@@ -145,7 +145,7 @@
 <DEFFUNC NAME="PAGE_NAV" REQUIRED="identifier" OPTIONAL="classname, nowrap">
 	<LET VAR="id_page_courante">[#ID]</LET>
 	<LOOP NAME="page_nav_parent" TABLE="publications" WHERE="type='menu' AND identifier='[#IDENTIFIER]'" SELECT="id" LIMIT="0,1">
-		<LOOP NAME="page_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre">
+		<LOOP NAME="page_nav_items" TABLE="liensinternes" WHERE="type='elementdemenu' AND idparent='[#ID]'" SELECT="id, titre" ORDER="rank">
 			<BEFORE>
 				<IF COND="![#NOWRAP]">
 					<nav class="navbar navbar-expand-lg navbar-center [#CLASSNAME]">
