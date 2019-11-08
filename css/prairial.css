@@ -240,7 +240,7 @@ section {
 	color: #fff;
 }
 
-.main-footer .row > div {
+.footer-col {
 	border-left: 5px solid #7553A8;
 }
 
@@ -256,9 +256,10 @@ section {
 }
 
 .logos-img {
+	width: 100%;
 	max-width: 200px;
-	max-height: 200px;
 	opacity: .9;
+	margin-bottom: 20px;
 }
 
 .logos-img:hover, .logos-img:focus {

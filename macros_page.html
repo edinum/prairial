@@ -115,13 +115,13 @@
 	<footer class="main-footer">
 		<div class="container">
 			<div class="row main-footer-contents ml-1 ml-sm-0">
-				<div class="col-12 col-sm-6 col-md-4">
+				<div class="footer-col col-12 col-sm-6 col-md-4">
 					<FUNC NAME="PAGE_LOGOS" IDENTIFIER="tutelles" />
 				</div>
-				<div class="col-12 col-sm-6 col-md-4">
+				<div class="footer-col col-12 col-sm-6 col-md-4">
 					<FUNC NAME="PAGE_LOGOS" IDENTIFIER="partenaires" />
 				</div>
-				<div class="col-12 col-md-4">
+				<div class="footer-col col-12 col-md-4">
 					<h2 class="footer-section-title">[@FOOTER_LIENS]</h2>
 					<ul class="footer-links">
 						<FUNC NAME="PAGE_NAV" IDENTIFIER="menu-footer" CLASSNAME="footer-nav" NOWRAP="TRUE" />
@@ -203,18 +203,22 @@
 				<div class="logos [#CLASSNAME]">
 					<IF COND="[#TITREPARENT]">
 						<h2 class="footer-section-title">[#TITREPARENT]</h2>
+							<div class="row h-100">
 					</IF>
 			</BEFORE>
 
 			<DO>
-				<IF COND="[#URL]">
-					<a href="[#URL]"><img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" /></a>
-				<ELSE />
-					<img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" />
-				</IF>
+				<div class="col-md-6 my-auto">
+					<IF COND="[#URL]">
+						<a href="[#URL]"><img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" /></a>
+					<ELSE />
+						<img class="logos-img" src="[#VIGNETTE]" alt="[#TITRE]" />
+					</IF>
+				</div>
 			</DO>
 
 			<AFTER>
+					</div>
 				</div>
 			</AFTER>
 		</LOOP>
