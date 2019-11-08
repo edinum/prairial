@@ -302,10 +302,30 @@ section {
 	margin-left: 5rem;
 }
 
-.texte-container img {
+p.texte img {
 	max-width: 100%;
-	margin: 0 auto;
+	margin: 40px auto;
 	display: block;
+}
+
+.titreillustration {
+	margin-top: 30px;
+	font-weight: bold;
+	text-align: center
+}
+
+.legendeillustration, .creditillustration {
+	color: #666;
+	font-size: 1rem;
+}
+
+.titreillustration + p.texte img {
+	margin-top: 10px;
+}
+
+p.texte + .legendeillustration, p.texte + .creditillustration, .legendeillustration + .creditillustration {
+	margin-top: -25px;
+	margin-bottom: 30px;
 }
 
 .texte li p {
@@ -314,7 +334,7 @@ section {
 
 .encadre {
     padding: 20px;
-    margin: 20px 0;
+    margin: 30px 0;
 }
 
 p.encadre {
@@ -351,18 +371,6 @@ img.texte-vignette {
 	font-size: 1rem;
 	color: #333;
 	margin-bottom: 10px;
-}
-
-.titreillustration {
-	font-weight: bold;
-	text-align: center
-}
-
-.legendeillustration, .creditillustration {
-	color: #666;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	font-size: 1rem;
 }
 
 .retour {
