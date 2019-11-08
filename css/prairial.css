@@ -81,8 +81,6 @@ a:hover, a:focus, a:active {
 .main-nav .nav-item:hover, .main-nav .nav-item:focus {
 	border-bottom-color: #F5BC00;
 }
-}
-
 
 .main-nav .navbar-toggler {
 	margin: 0 0 0 auto;
