@@ -34,6 +34,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-12 col-lg-8 offset-lg-2">
+				<!--[ Article ]-->
 				<div class="article">
 					<div class="titre">[#TITRE|removenotes]</div>
 					<IF COND="[#SOUSTITRE]">
@@ -49,14 +50,48 @@
 						[#TEXTE|removenotes]
 					</div>
 				</div>
+
+				<!--[ Documents annexes ]-->
+				<MACRO NAME="ARTICLE_DOCANNEXES" />
+
+				<!--[ Lien retour ]-->
 				<IF COND="[#TYPE] EQ 'billetactualite'">
 					<a href="./?identifier=actualites" class="retour">&lt; [@RETOUR_ACTUALITES]</a>
-					<ELSE />
+				<ELSE />
 					<a href="./" class="retour">&lt; [@RETOUR_ACCUEIL]</a>
 				</IF>
 			</div>
 		</div>
 	</div>
+</DEFMACRO>
+
+/**
+ * Documents annexes dans les articles.
+ */
+<DEFMACRO NAME="ARTICLE_DOCANNEXES">
+	<LOOP NAME="article_docannexes" TABLE="entities" SELECT="id" WHERE="idparent = '[#ID]' AND type = 'fichierannexe'" ORDER="rank">
+		<BEFORE>
+			<div id="docannexes" class="docannexes">
+				<h2 class="section-h-small"><IF COND="[#NBRESULTATS] GT 1">[@DOCANNEXES]<ELSE />[@DOCANNEXE]</IF></h2>
+				<ul class="docannexes__items">
+		</BEFORE>
+
+		<DO>
+			<li class="docannexe">
+				<LOOP NAME="article_docannexes_item" TABLE="fichiers" WHERE="identity = '[#ID]' AND document != ''">
+					<p class="docannexe__title"><a href="[#DOCUMENT]">[#TITRE]</a> <span class="additional-info">([#DOCUMENT|getFileMime]&#160;&#8211;&#160;[#DOCUMENT|nicefilesize])</span></p>
+					<IF COND="[#DESCRIPTION]">
+						<div class="docannexe__description">[#DESCRIPTION|removetags('p')]</div>
+					</IF>
+				</LOOP>
+			</li>
+		</DO>
+
+		<AFTER>
+				</ul>
+			</div>
+		</AFTER>
+	</LOOP>
 </DEFMACRO>
 
 /**

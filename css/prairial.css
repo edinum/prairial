@@ -123,6 +123,14 @@ a.btn-primary:active, a.btn-primary:focus {
 	line-height: 1.2;
 }
 
+.section-h-small {
+	font-size: 24px;
+	font-weight: 300;
+	line-height: 1.2;
+	color: #343a40;
+	margin-bottom: 20px;
+}
+
 .jumbotron-h {
 	font-size: 42px;
 	font-weight: 300;
@@ -370,6 +378,31 @@ img.texte-vignette {
 	font-size: 1rem;
 	color: #333;
 	margin-bottom: 10px;
+}
+
+.docannexes {
+	margin: 30px 0;
+	border-left: 5px solid #7553A8;
+	padding: 5px 0 5px 20px;
+}
+
+.docannexes__items {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+.docannexe {
+	font-size: 17px;
+	margin: 10px 0 10px;
+}
+
+.docannexe__title {
+	margin: 0;
+}
+
+.docannexe__description {
+	color: #57636e;
 }
 
 .retour {
