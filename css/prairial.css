@@ -308,6 +308,20 @@ section {
 	display: block;
 }
 
+.encadre {
+    padding: 20px;
+    margin: 20px 0;
+}
+
+p.encadre {
+  background-color: #D2DCE6;
+  margin-bottom: 0;
+}
+
+p.encadre + p.encadre {
+	margin-top: 0;
+}
+
 img.texte-vignette {
 	width: 100%;
 	max-width: 100%;
