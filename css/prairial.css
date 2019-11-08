@@ -308,6 +308,10 @@ section {
 	display: block;
 }
 
+.texte li p {
+	margin-bottom: 5px;
+}
+
 .encadre {
     padding: 20px;
     margin: 20px 0;
