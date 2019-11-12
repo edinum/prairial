@@ -70,12 +70,13 @@ a:hover, a:focus, a:active {
 	}
 
 	.main-nav .nav-item {
-	padding: 10px 10px 5px 10px;
-	border-bottom: 5px solid transparent;
-	-webkit-transition : border 200ms ease-out;
-  -moz-transition : border 200ms ease-out;
-  -o-transition : border 200ms ease-out;
-  transition : border 200ms ease-out;
+		padding: 10px 10px 5px 10px;
+		border-bottom: 5px solid transparent;
+		-webkit-transition : border 200ms ease-out;
+		-moz-transition : border 200ms ease-out;
+		-o-transition : border 200ms ease-out;
+		transition : border 200ms ease-out;
+	}
 }
 
 .main-nav:not(:hover) .nav-item.active {
