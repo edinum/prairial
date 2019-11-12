@@ -427,6 +427,26 @@ img.texte-vignette {
 	margin-bottom: 40px;
 }
 
+.filters-navbar .navbar-brand {
+	display: block;
+	width: 100%;
+}
+
+.filter-control {
+	margin-top: .5rem;
+}
+
+@media (min-width: 768px) { 
+	.filter-control {
+		margin-top: 0;
+		margin-left: .5rem;
+	}
+
+	.filter-control:first-child {
+		margin-left: 0;
+	}
+}
+
 .filter-reset {
 	white-space: nowrap;
 	color: #7553A8;

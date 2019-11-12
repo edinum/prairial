@@ -283,13 +283,13 @@
 <DEFMACRO NAME="CATALOGUE_FILTRES">
 	<div id="filters" class="filters">
 		<nav class="filters-navbar navbar justify-content-start align-items-center">
-			<div class="navbar-brand">[@FILTRER]&nbsp;:</div>
+			<div class="navbar-brand">[@FILTRER]</div>
 			<div class="navbar-form navbar-left ">
 				<div class="d-block d-md-flex">
 						<LOOP NAME="catalogue_filters_index" TABLE="entrytypes" WHERE="class = 'filtrescatalogue'" SELECT="type, title, id" ORDER="rank" />
 							<LOOP NAME="catalogue_filters_entries" TABLE="entries" WHERE="idtype = '[#ID]'" SELECT="id, g_name" ORDER="g_name" />
 								<BEFORE>
-									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control custom-select mt-2 mt-md-0 ml-md-2">
+									<select id="filter-[#TYPE]" name="filter-[#TYPE]" class="form-control filter-control custom-select">
 									<option value="">[#TITLE]</option>
 								</BEFORE>
 								<DO> 
