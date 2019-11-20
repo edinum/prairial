@@ -161,7 +161,7 @@
       </row>
       <row>
         <col name="id">115</col>
-        <col name="icon"></col>
+        <col name="icon">lodel/icons/lien.gif</col>
         <col name="class">liensinternes</col>
         <col name="title">Liens internes</col>
         <col name="altertitle"></col>
