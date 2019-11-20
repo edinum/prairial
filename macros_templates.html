@@ -13,7 +13,9 @@
  * Template catalogue.html
  */
 <DEFMACRO NAME="CATALOGUE_MAIN" >
-	<FUNC NAME="SHOW_CATALOGUE" FILTRES="1" TITRE_SECTION="[#TITRE]" />
+	<LOOP NAME="catalogue_main" TABLE="publications" WHERE="identifier='catalogue'" SELECT="titre" LIMIT="0,1" />
+		<FUNC NAME="SHOW_CATALOGUE" FILTRES="1" TITRE_SECTION="[#TITRE]" />
+	</LOOP>
 </DEFMACRO>
 
 /**
