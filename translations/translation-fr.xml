@@ -1,0 +1,34 @@
+<lodeltranslations>
+<translations>
+<row><lang>fr</lang>
+<title>français</title>
+<textgroups>site</textgroups>
+<translators>Thomas Brouard</translators>
+<modificationdate></modificationdate>
+<creationdate>0000-00-00</creationdate>
+<texts>
+<contents name="en_savoir_plus" textgroup="site" status="2">En savoir plus</contents>
+<contents name="lire_la_suite" textgroup="site" status="2">Lire la suite</contents>
+<contents name="actualites" textgroup="site" status="2">Actualités du portail</contents>
+<contents name="revues_recentes" textgroup="site" status="2">Dernières revues en ligne</contents>
+<contents name="visiter" textgroup="site" status="2">Visiter le site</contents>
+<contents name="consulter_le_catalogue" textgroup="site" status="2">Consulter l'intégralité du catalogue</contents>
+<contents name="toutes_les_actus" textgroup="site" status="2">Toutes les actualités</contents>
+<contents name="filtrer" textgroup="site" status="2">Filtrer</contents>
+<contents name="revues_aucun_resultat" textgroup="site" status="2">Aucun résultat ne correspond à aux critères sélectionnés.</contents>
+<contents name="supprimer_les_filtres" textgroup="site" status="2">Supprimer tous les filtres</contents>
+<contents name="retour_accueil" textgroup="site" status="2">Retour à l'accueil</contents>
+<contents name="retour_actualites" textgroup="site" status="2">Retour aux actualités</contents>
+<contents name="propulse_par_lodel" textgroup="site" status="2">Propulsé par Lodel</contents>
+<contents name="administration_du_site" textgroup="site" status="2">Administration du site</contents>
+<contents name="footer_liens" textgroup="site" status="2">Liens</contents>
+<contents name="erreur_404" textgroup="site" status="2">Erreur 404</contents>
+<contents name="page_not_found" textgroup="site" status="2">La page que vous demandez n'existe pas.</contents>
+<contents name="docannexes" textgroup="site" status="2">Documents annexes</contents>
+<contents name="docannexe" textgroup="site" status="2">Document annexe</contents>
+<contents name="erreur_500" textgroup="site" status="2">Erreur interne</contents>
+<contents name="internal_error" textgroup="site" status="2">Désolé, le site rencontre actuellement des problèmes. Nous faisons tout notre possible pour réparer cette page dans les meilleurs délais.</contents>
+</texts>
+</row>
+</translations>
+</lodeltranslations>
