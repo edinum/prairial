@@ -42,7 +42,7 @@ INSERT INTO #_TP_classes (id, icon, class, title, altertitle, classtype, comment
 (68, 'lodel/icons/collection.gif', 'publications', 'Publications', '<r2r:ml lang="en">Folders</r2r:ml><r2r:ml lang="es">Publicaciones</r2r:ml><r2r:ml lang="pt">Publicações</r2r:ml>', 'entities', '', 1, 1, '2019-09-05 09:46:17'),
 (69, 'lodel/icons/texte.gif', 'textes', 'Textes', '<r2r:ml lang="en">Texts</r2r:ml><r2r:ml lang="es">Textos</r2r:ml><r2r:ml lang="pt">Textos</r2r:ml>', 'entities', '', 2, 32, '2019-09-05 09:46:17'),
 (70, 'lodel/icons/texte_simple.gif', 'textessimples', 'Textes simples', '<r2r:ml lang="en">Simple texts</r2r:ml><r2r:ml lang="es">Textos sencillos</r2r:ml><r2r:ml lang="pt">Textos simples</r2r:ml>', 'entities', '', 3, 32, '2019-09-05 09:46:17'),
-(115, '', 'liensinternes', 'Liens internes', '', 'entities', '', 15, 1, '2019-10-01 19:31:13'),
+(115, 'lodel/icons/lien.gif', 'liensinternes', 'Liens internes', '', 'entities', '', 15, 1, '2019-10-01 19:31:13'),
 (143, 'lodel/icons/index.gif', 'filtrescatalogue', 'Filtres du catalogue', '', 'entries', '', 16, 1, '2019-10-07 15:11:09');
 
 #
