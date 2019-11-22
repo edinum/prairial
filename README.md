@@ -2,6 +2,8 @@
 
 > Modèle éditorial pour Lodel du portail Prairial.
 
+Prairial est compatible avec Lodel 1.0.
+
 ## Installation sur un site Lodel vierge
 
 Il est nécessaire d'avoir les droits d'administrateur Lodel pour procéder à l'installation.
