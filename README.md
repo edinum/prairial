@@ -6,33 +6,34 @@
 
 Il est nécessaire d'avoir les droits d'administrateur Lodel pour procéder à l'installation.
 
-### Import du modèle éditorial
+### 1. Import du modèle éditorial
 
-Créer une archive ZIP à partir du contenu du dossier `model/` du dépôt et la renommer `modelxml-prairial.zip`. 
-**Important** : la racine du zip ne doit pas contenir le dossier `model/` mais le contenu du dossier.
+Créer une archive ZIP à partir du contenu du dossier `model-prairial/` et la nommer `model-prairial.zip`.
 
-Sur le panneau d'administration du site Lodel, sélectionner "Importer un modèle éditorial au format XML" et importer l'archive.
+**:warning: Important** : la racine du zip ne doit pas contenir le dossier `model-prairial/` lui-même mais son contenu. C'est donc l'ensemble des fichiers contenus dans `model-prairial/` qu'il faut sélectionner avec l'outil de compression, et non le dossier lui-même. Toute mauvaise compression entraînera des problèmes lors de l'utilisation des templates.
 
-### Import des traductions
+Sur le panneau d'administration du site Lodel, sélectionner "Importer un modèle éditorial", puis importer l'archive `model-prairial.zip` avec le bouton "Télécharger".
+
+### 2. Import des traductions
 
 Sur le panneau d'administration du site Lodel, sélectionner "Administrer les traductions du site" puis "Importer une traduction". Importer les fichiers présent dans le répertoire `translations/` du dépôt.
 
-### Préparation des données du site
+### 3. Préparation des données du site
 
 Compléter les métadonnées du site dans les options de Lodel.
 
 À la racine du site, ajouter les publications suivantes en veillant à compléter leur champ "identifiant" comme indiqué : 
 
-| Type                   | Nom                     | Identifiant de la publication | Usage                                                        |
+| Type | Nom | Identifiant de la publication | Usage |
 | ---------------------- | ----------------------- | ----------------------------- | ------------------------------------------------------------ |
-| `annuairedesites`      | "Catalogue des revues"  | `catalogue`                   | Contient les élément de type `noticedesite` qui constituent catalogue. |
-| `rubriqueactualites`   | "Actualités du portail" |                               | Contient les billets des actualités.                         |
-| `rubriqueinformations` | "Pages d'informations"  |                               | Contient les diverses pages d'informations du site.          |
-| `menu`                 | "Texte d'accueil"       | `presentation`                | Contient l'encadré de présentation sur la page d'accueil, sous forme de documents de type `elementdemenu`. Le premier `elementdemenu` décrit le texte principal de la présentation. Les éléments suivants contiennent les liens. |
-| `menu`                 | "Menu principal"        | `menu-principal`              | Contient les `elementdemenu` qui constituent le menu principal. |
-| `menu`                 | "Menu footer"           | `menu-footer`                 | Contient les `elementdemenu` qui constituent le menu du footer. |
-| `annuairedesites`      | "Partenaires"           | `partenaires`                 | Contient les élément de type `noticedesite` qui correspondent aux logos des partenaires affichés dans le footer. |
-| `annuairedesites`      | "Tutelles"              | `tutelles`                    | Contient les élément de type `noticedesite` qui correspondent aux logos des tutelles affichés dans le footer. |
+| `annuairedesites` | "Catalogue des revues" | `catalogue` | Contient les élément de type `noticedesite` qui constituent catalogue. |
+| `rubriqueactualites` | "Actualités du portail" | | Contient les billets des actualités. |
+| `rubriqueinformations` | "Pages d'informations" | | Contient les diverses pages d'informations du site. |
+| `menu` | "Texte d'accueil" | `presentation` | Contient l'encadré de présentation sur la page d'accueil, sous forme de documents de type `elementdemenu`. Le premier `elementdemenu` décrit le texte principal de la présentation. Les éléments suivants contiennent les liens. |
+| `menu` | "Menu principal" | `menu-principal` | Contient les `elementdemenu` qui constituent le menu principal. |
+| `menu` | "Menu footer" | `menu-footer` | Contient les `elementdemenu` qui constituent le menu du footer. |
+| `annuairedesites` | "Partenaires" | `partenaires` | Contient les élément de type `noticedesite` qui correspondent aux logos des partenaires affichés dans le footer. |
+| `annuairedesites` | "Tutelles" | `tutelles` | Contient les élément de type `noticedesite` qui correspondent aux logos des tutelles affichés dans le footer. |
 
 Voir le fichier `example.jpg` à la racine du projet pour un exemple de structuration des éléments du site.
 
@@ -118,9 +119,9 @@ Le collectif Edinum a accepté de publier son code source sous licence libre GPL
 
 **2019, Thomas Brouard/Edinum.org**
 
-This program is free software: you can redistribute it and/or modify  it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your  option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful, but  WITHOUT ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with this program.  If not, see http://www.gnu.org/licenses/.
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
 
