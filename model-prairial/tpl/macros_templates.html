@@ -5,7 +5,7 @@
  */
 <DEFMACRO NAME="HOME_MAIN">
 	<MACRO NAME="HOME_PRESENTATION" />
-	<FUNC NAME="SHOW_CATALOGUE" MAX="3" TITRE_SECTION="[@REVUES_RECENTES]" />
+	<FUNC NAME="SHOW_CATALOGUE" MAX="3" TITRE_SECTION="[@REVUES_RECENTES]" ORDER="datemisenligne DESC" />
 	<MACRO NAME="HOME_ACTUALITES" />
 </DEFMACRO>
 
@@ -210,12 +210,16 @@
  * @param {boolean} [filtres] - Afficher les filtres dynamiques.
  * @param {boolean} [titre_section] - Titre à afficher avant le catalogue.
  */
-<DEFFUNC NAME="SHOW_CATALOGUE" OPTIONAL="max, filtres, titre_section">
+<DEFFUNC NAME="SHOW_CATALOGUE" OPTIONAL="max, filtres, titre_section, order">
+	<IF COND="![#ORDER]">
+		<LET VAR="order">rank</LET>
+	</IF>
+
 	<LOOP NAME="catalogue_parent" TABLE="publications" WHERE="type='annuairedesites' AND identifier='catalogue'" SELECT="id" LIMIT="0,1" />
 		<IF COND="![#MAX]">
 			<LET VAR="max" />9999</LET>
 		</IF>
-		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" LIMIT="0,[#MAX]" ORDER="rank" />
+		<LOOP NAME="catalogue_issues" TABLE="liens" WHERE="type='noticedesite' AND idparent='[#ID]'" LIMIT="0,[#MAX]" ORDER="[#ORDER]" />
 			<BEFORE>
 				<section class="revues">
 					<div class="container">
